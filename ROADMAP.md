@@ -11,26 +11,28 @@ Status legend: ✅ Completed · 🔄 In Progress · ⬜ Not Started
 | Task | Owner |
 |---|---|
 | Repo structure, README, .gitignore, .env.example, requirements.txt | Member 1 |
-| Set up Ollama locally, test basic prompt/response pipeline | Member 1 |
-| Research yfinance + NewsAPI, pull sample data for 2–3 stocks | Member 2 |
-| Read up on LangGraph basics (nodes, edges, state) — shared learning | Both |
+| Set up Ollama locally and verify prompt/response pipeline | Member 1 |
+| Research yfinance and NewsAPI, explore available endpoints | Member 2 |
+| Learn LangGraph basics (nodes, edges, state management) | Both |
 **Status: ✅ Completed**
 
-## Week 2 — Investment Thesis Agent (Core Logic)
+## Week 2 — Investment Thesis Agent (Initial Prototype) + Checkpoint 1
 | Task | Owner |
 |---|---|
-| Build price/fundamentals fetch via yfinance | Member 1 |
-| Build news fetch + cleaning via NewsAPI | Member 2 |
-| Design prompt for Ollama: compare thesis vs current data | Member 1 |
-| Test agent end-to-end on 3–5 sample stocks, log outputs | Both |
-**Status: ✅ Completed**
+| Build stock price & fundamentals fetch using yfinance | Member 1 |
+| Build basic news retrieval using NewsAPI | Member 1 |
+| Design initial Ollama prompt to compare investment thesis with current market data | Member 1 |
+| Run the prototype on 2–3 sample stocks | Member 1 |
+| Prepare a working demo for supervisor review | Both |
+**Status: 🔄 In Progress**
 
-## Week 3 — Investment Thesis Agent (Refine) + Checkpoint 1
+## Week 3 — Investment Thesis Agent (Refinement)
 | Task | Owner |
 |---|---|
-| Structure agent output (thesis holds/weakened/broken + reasoning) | Member 1 |
-| Write first ADR: why Ollama + this prompt design | Member 2 |
-| Prepare demo of Thesis Agent for supervisor review | Both |
+| Improve news filtering and preprocessing | Member 2 |
+| Structure agent output (Thesis Holds / Weakened / Broken + reasoning) | Member 1 |
+| Expand testing to 5–10 sample stocks and log results | Both |
+| Write first ADR: Why Ollama + Prompt Design | Member 2 |
 **Status: ⬜ Not Started**
 
 ## Week 4 — Portfolio Health Agent
