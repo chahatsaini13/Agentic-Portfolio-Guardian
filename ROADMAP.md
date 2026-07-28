@@ -16,7 +16,7 @@ Status legend: ✅ Completed · 🔄 In Progress · ⬜ Not Started
 | Learn LangGraph basics (nodes, edges, state management) | Both |
 **Status: ✅ Completed**
 
-## Week 2 — Investment Thesis Agent (Initial Prototype) + Checkpoint 1
+## Week 2 — Investment Thesis Agent (Initial Prototype) 
 | Task | Owner |
 |---|---|
 | Build stock price & fundamentals fetch using yfinance | Member 1 |
@@ -52,7 +52,7 @@ Status legend: ✅ Completed · 🔄 In Progress · ⬜ Not Started
 | Benchmark sentiment tagging against Financial PhraseBank | Member 2 |
 **Status: ⬜ Not Started**
 
-## Week 6 — Early Warning Agent + Checkpoint 2
+## Week 6 — Early Warning Agent 
 | Task | Owner |
 |---|---|
 | Detect red-flag events (management change, litigation, downgrades) | Member 1 |
@@ -77,7 +77,7 @@ Status legend: ✅ Completed · 🔄 In Progress · ⬜ Not Started
 | Wire Orchestrator's JSON output into the UI | Both |
 **Status: ⬜ Not Started**
 
-## Week 9 — Evaluation + Checkpoint 3
+## Week 9 — Evaluation 
 | Task | Owner |
 |---|---|
 | Validate sentiment agent accuracy against Financial PhraseBank | Member 2 |
