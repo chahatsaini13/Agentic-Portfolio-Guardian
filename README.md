@@ -8,9 +8,6 @@ original reasoning behind each holding using live market data, financial
 news, and portfolio composition — surfacing what has changed and why,
 **without issuing direct buy/sell recommendations**.
 
-> **Disclaimer:** This project is for educational purposes only and does
-> not constitute financial advice.
-
 ## Architecture
 
 ```mermaid
