@@ -26,10 +26,6 @@ separation, rather than bolting it on everywhere it doesn't fit:
 - **Evaluation (Week 9):** measure whether the contrastive embeddings
   actually improved separation/accuracy over the baseline (keyword-only /
   generic embeddings), using Financial PhraseBank labels as ground truth.
-
-This is our current planned direction — if a simpler approach performs
-comparably during implementation, we'll note that trade-off in an ADR
-rather than force contrastive learning in where it doesn't add value.
 ---
 
 ## Week 1 — Setup & Foundations
