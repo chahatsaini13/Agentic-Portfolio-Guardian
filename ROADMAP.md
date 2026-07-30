@@ -5,6 +5,31 @@
 
 Status legend: ✅ Completed · 🔄 In Progress · ⬜ Not Started
 
+## Contrastive Learning Integration
+Per supervisor's suggestion, we're incorporating contrastive learning at
+points where the underlying task is fundamentally about similarity or
+separation, rather than bolting it on everywhere it doesn't fit:
+
+- **News relevance filtering (Week 3):** learn embeddings that pull
+  thesis-relevant news closer together and push irrelevant news further
+  apart, instead of relying on keyword overlap alone.
+- **Sentiment tagging (Week 5):** fine-tune sentence embeddings
+  contrastively (SimCSE-style, using Financial PhraseBank as labeled
+  anchor pairs) so similar-sentiment financial text clusters together in
+  embedding space — expected to outperform generic off-the-shelf
+  embeddings on our benchmark.
+- **Red-flag detection (Week 6):** treat this as anomaly detection —
+  contrastively train embeddings so "routine business news" and
+  "red-flag news" (management change, litigation, downgrades) separate
+  into distinguishable clusters, supplementing rule-based keyword
+  matching with a learned signal.
+- **Evaluation (Week 9):** measure whether the contrastive embeddings
+  actually improved separation/accuracy over the baseline (keyword-only /
+  generic embeddings), using Financial PhraseBank labels as ground truth.
+
+This is our current planned direction — if a simpler approach performs
+comparably during implementation, we'll note that trade-off in an ADR
+rather than force contrastive learning in where it doesn't add value.
 ---
 
 ## Week 1 — Setup & Foundations
@@ -32,17 +57,20 @@ Get stock price & fundamentals from yfinance → Get relevant news using NewsAPI
 ```
 **Status: ✅ Completed**
 
-## Week 3 — Investment Thesis Agent (Refinement)
+## Week 3 — Investment Thesis Agent (Refinement + Contrastive Filtering)
 | Task | Owner |
 |---|---|
-| Improve news filtering and preprocessing | Member 2 |
+| Collect thesis-relevant vs irrelevant news pairs for training data | Member 2 |
+| Train/fine-tune contrastive embedding model on these pairs | Member 2 |
+| Replace keyword-based news filtering with embedding-similarity filtering | Member 1 |
 | Structure agent output (Thesis Holds / Weakened / Broken + reasoning) | Member 1 |
 | Expand testing to 5–10 sample stocks and log results | Both |
-| Write first ADR: Why Ollama + Prompt Design | Member 2 |
+| Write ADR: Why Ollama + Prompt Design, and why contrastive filtering over keyword matching | Member 2 |
 **Pipeline:**
 ```
 Get stock price & fundamentals from yfinance → Get news using NewsAPI
-→ Filter out irrelevant/noisy news articles → Build combined prompt
+→ Embed thesis + news using contrastively-trained encoder
+→ Keep news above similarity threshold, discard the rest → Build combined prompt
 → Send prompt to local Ollama model → Parse model response into JSON
 → Validate output matches expected structure
 ```
@@ -61,33 +89,43 @@ Load sample portfolio (holdings, sectors, weights) → Compute weight of each se
 → Compute diversification/concentration score → Flag stocks/sectors that are over-exposed
 → Build structured risk summary
 ```
+*No contrastive learning here — this agent is purely computing numeric
+concentration metrics, not comparing/separating text or embeddings, so a
+learned similarity approach doesn't add value.*
 **Status: ⬜ Not Started**
 
-## Week 5 — Market Intelligence Agent
+## Week 5 — Market Intelligence Agent (with Contrastive Sentiment Tagging)
 | Task | Owner |
 |---|---|
 | Pull live market/news updates per holding | Member 1 |
-| Summarize relevant developments using LLM | Member 2 |
-| Benchmark sentiment tagging against Financial PhraseBank | Member 2 |
+| Fine-tune sentence embeddings contrastively using Financial PhraseBank | Member 2 |
+| Tag sentiment using contrastive embedding space (nearest-cluster match) | Member 2 |
+| Summarize relevant developments using LLM | Member 1 |
+| Compare contrastive tagging accuracy vs generic embedding baseline | Both |
 **Pipeline:**
 ```
-Get recent news for each holding → Summarize key developments using local LLM
-→ Tag sentiment of each news item → Check sentiment accuracy against Financial PhraseBank
-→ Build structured summary output
+Get recent news for each holding → Embed news using contrastively fine-tuned
+sentence encoder → Tag sentiment via nearest cluster in embedding space
+→ Compare against Financial PhraseBank labels for accuracy
+→ Summarize key developments using local LLM → Build structured summary output
 ```
 **Status: ⬜ Not Started**
 
-## Week 6 — Early Warning Agent 
+## Week 6 — Early Warning Agent (Contrastive Anomaly Detection)
 | Task | Owner |
 |---|---|
-| Detect red-flag events (management change, litigation, downgrades) | Member 1 |
-| Score severity/urgency of each flag | Member 2 |
+| Label sample of "routine" vs "red-flag" news for training pairs | Member 1 |
+| Train contrastive embeddings to separate routine vs red-flag news | Member 2 |
+| Combine contrastive signal with rule-based keyword detection | Member 1 |
+| Score severity/urgency of each flag using LLM | Member 2 |
 | Output structured alerts | Both |
 | Prepare demo of all 4 agents (individually) for supervisor review | Both |
 **Pipeline:**
 ```
-Get recent news for each holding → Detect red-flag events (management change, litigation, downgrades)
-→ Score severity/urgency of each flag using LLM → Build structured alert output
+Get recent news for each holding → Embed news using contrastively trained encoder
+→ Flag news that falls in the "red-flag" cluster (anomaly signal)
+→ Cross-check against rule-based keyword detection → Score severity/urgency using LLM
+→ Build structured alert output
 ```
 **Status: ⬜ Not Started**
 
@@ -103,6 +141,8 @@ Define shared state structure for LangGraph → Add each of the 4 agents as a gr
 → Connect nodes in the right order/logic → Run the full graph
 → Merge all agent outputs into one combined insight → Handle failures/timeouts gracefully
 ```
+*No new contrastive learning work here — this week reuses the embeddings
+already trained in Weeks 3, 5, and 6 inside each agent node.*
 **Status: ⬜ Not Started**
 
 ## Week 8 — Dashboard / UI Layer
@@ -119,10 +159,11 @@ Load Orchestrator's combined JSON output → Display thesis status per stock
 ```
 **Status: ⬜ Not Started**
 
-## Week 9 — Evaluation 
+## Week 9 — Evaluation (incl. Contrastive Embedding Quality)
 | Task | Owner |
 |---|---|
 | Validate sentiment agent accuracy against Financial PhraseBank | Member 2 |
+| Measure contrastive embedding separation quality (e.g. cluster purity/silhouette score) vs generic embedding baseline | Member 2 |
 | Backtest thesis-flip detection on historical NSE data (1990–2021) | Member 1 |
 | Document results in `docs/decisions/` | Both |
 | Full end-to-end demo for supervisor review | Both |
@@ -130,6 +171,7 @@ Load Orchestrator's combined JSON output → Display thesis status per stock
 ```
 Load evaluation dataset (Financial PhraseBank / historical NSE data)
 → Run agent on the dataset → Compute accuracy/backtest metrics
+→ Compare contrastive-embedding results vs generic-embedding baseline
 → Log results and findings as an ADR
 ```
 **Status: ⬜ Not Started**
@@ -144,4 +186,3 @@ Load evaluation dataset (Financial PhraseBank / historical NSE data)
 **Status: ⬜ Not Started**
 
 ---
-
