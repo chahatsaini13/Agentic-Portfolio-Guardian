@@ -1,0 +1,187 @@
+{
+  "_notes": {
+    "purpose": "Hand-curated synthetic dataset for training a contrastive relevance filter (thesis vs news). Not scraped from NewsAPI - headlines are synthetic but written to be realistic for Indian equities.",
+    "negative_types": {
+      "easy": "Different company / unrelated sector entirely - should be trivially separable even by a generic embedding model.",
+      "hard": "Same company as the thesis, but the news doesn't actually bear on THIS thesis's logic - this is the case keyword overlap fails on and contrastive learning is meant to fix."
+    }
+  },
+  "theses": [
+    {
+      "id": "t1_tatamotors_ev",
+      "ticker": "TATAMOTORS.NS",
+      "company": "Tata Motors",
+      "thesis": "I bought this because EV adoption will drive demand",
+      "relevant_news": [
+        "Tata Motors' EV market share slips as Tata Curvv EV faces stiffer competition from MG and Hyundai",
+        "Tata Motors flags resale value concerns as a key barrier to EV adoption in India",
+        "Government extends FAME-III subsidy for electric vehicles, Tata Motors among top beneficiaries",
+        "Tata Motors reports 18% YoY growth in EV unit sales for the quarter"
+      ],
+      "irrelevant_news_easy": [
+        "Infosys wins multi-year IT services deal with European retailer",
+        "RBI holds repo rate steady at 6.5% in latest monetary policy review",
+        "Sun Pharma gets USFDA approval for generic dermatology drug"
+      ],
+      "irrelevant_news_hard": [
+        "Tata Motors' commercial truck financing arm reports rise in loan defaults",
+        "Tata Motors appoints new regional sales head for South India",
+        "Tata Motors' Jaguar Land Rover unit recalls vehicles in the UK over software issue"
+      ]
+    },
+    {
+      "id": "t2_reliance_jio",
+      "ticker": "RELIANCE.NS",
+      "company": "Reliance Industries",
+      "thesis": "I bought this because Jio expansion will drive stable growth",
+      "relevant_news": [
+        "Jio crosses 480 million subscribers as 5G rollout accelerates in tier-2 cities",
+        "Reliance Jio ARPU rises to Rs 203 on back of tariff hikes",
+        "Jio Platforms announces further investment in fiber broadband infrastructure",
+        "Reliance Jio faces subscriber churn in metro circles as Airtel gains ground"
+      ],
+      "irrelevant_news_easy": [
+        "HDFC Bank launches new co-branded credit card with airline partner",
+        "Nifty ends flat as IT stocks drag, banking stocks support index",
+        "Wipro announces leadership transition in its cloud services vertical"
+      ],
+      "irrelevant_news_hard": [
+        "Reliance Retail opens 50 new stores across tier-3 cities this quarter",
+        "Reliance Industries' O2C (oil-to-chemicals) margins compress on weak refining spreads",
+        "Reliance Industries' board approves bonus share issue"
+      ]
+    },
+    {
+      "id": "t3_infosys_ai",
+      "ticker": "INFY.NS",
+      "company": "Infosys",
+      "thesis": "I bought this because AI services will accelerate revenue growth",
+      "relevant_news": [
+        "Infosys Topaz AI suite adoption grows among BFSI clients, company says",
+        "Infosys reports AI-linked deal wins slower than guided, flags cautious client spending",
+        "Infosys partners with Nvidia to build agentic AI offerings for enterprise clients",
+        "Infosys AI revenue contribution still under 5% of total, analysts note"
+      ],
+      "irrelevant_news_easy": [
+        "Maruti Suzuki reports strong SUV segment sales for the festive season",
+        "Sensex slips on weak global cues, FIIs remain net sellers",
+        "Adani Green commissions new solar park in Rajasthan"
+      ],
+      "irrelevant_news_hard": [
+        "Infosys faces regulatory penalty over employee time-tracking compliance issue",
+        "Infosys announces wage hikes for junior employees effective next quarter",
+        "Infosys co-founder comments on India's IT hiring slowdown at industry event"
+      ]
+    },
+    {
+      "id": "t4_hdfcbank_retail",
+      "ticker": "HDFCBANK.NS",
+      "company": "HDFC Bank",
+      "thesis": "I bought this because retail credit growth will drive earnings",
+      "relevant_news": [
+        "HDFC Bank retail loan book grows 14% YoY, led by personal loans and credit cards",
+        "HDFC Bank tightens underwriting standards on unsecured retail credit",
+        "RBI's new risk-weight norms to raise capital requirement for HDFC Bank's retail book",
+        "HDFC Bank retail deposit growth lags loan growth, pressuring credit-deposit ratio"
+      ],
+      "irrelevant_news_easy": [
+        "Tata Steel commissions new blast furnace at Kalinganagar plant",
+        "Zomato reports narrower losses in latest quarterly results",
+        "Coal India production rises 6% in monthly output data"
+      ],
+      "irrelevant_news_hard": [
+        "HDFC Bank's corporate banking vertical wins large infrastructure financing mandate",
+        "HDFC Bank opens new branches in northeastern states as part of expansion plan",
+        "HDFC Bank's IT systems face brief outage affecting UPI transactions"
+      ]
+    },
+    {
+      "id": "t5_sunpharma_generics",
+      "ticker": "SUNPHARMA.NS",
+      "company": "Sun Pharma",
+      "thesis": "I bought this because US generics approvals will drive earnings",
+      "relevant_news": [
+        "Sun Pharma receives USFDA approval for generic version of blockbuster diabetes drug",
+        "Sun Pharma's US generics pricing pressure eases in latest quarter",
+        "Sun Pharma faces delay in USFDA approval for key generic pipeline drug",
+        "Sun Pharma expands US specialty portfolio with new generic launches"
+      ],
+      "irrelevant_news_easy": [
+        "L&T wins large order for metro rail construction in Mumbai",
+        "ITC's FMCG segment posts steady volume growth",
+        "Bajaj Finance shares rise on strong AUM growth guidance"
+      ],
+      "irrelevant_news_hard": [
+        "Sun Pharma's domestic formulations business sees management reshuffle",
+        "Sun Pharma announces dividend for the fiscal year",
+        "Sun Pharma's R&D facility in Gujarat receives state pollution control clearance"
+      ]
+    },
+    {
+      "id": "t6_adanigreen_renewables",
+      "ticker": "ADANIGREEN.NS",
+      "company": "Adani Green Energy",
+      "thesis": "I bought this because renewable capacity expansion will drive long-term growth",
+      "relevant_news": [
+        "Adani Green commissions 1 GW solar-wind hybrid capacity in Gujarat",
+        "Adani Green's capacity addition pace slows amid land acquisition delays",
+        "Adani Green signs long-term power purchase agreement with state utility",
+        "Adani Green's debt-funded expansion draws rating agency scrutiny"
+      ],
+      "irrelevant_news_easy": [
+        "Titan Company reports strong jewellery segment sales during wedding season",
+        "Cipla receives warning letter from USFDA for manufacturing facility",
+        "Bharti Airtel raises tariffs across prepaid plans"
+      ],
+      "irrelevant_news_hard": [
+        "Adani Group's ports business reports record cargo volumes",
+        "Adani Green's promoter entity completes stake sale to institutional investor",
+        "Adani Green's stock included in a global sustainability index"
+      ]
+    },
+    {
+      "id": "t7_itc_fmcg",
+      "ticker": "ITC.NS",
+      "company": "ITC Limited",
+      "thesis": "I bought this because FMCG segment diversification will reduce cigarette-revenue dependence",
+      "relevant_news": [
+        "ITC's non-cigarette FMCG revenue share crosses 45% for the first time",
+        "ITC's packaged foods business grows faster than cigarette segment for third straight quarter",
+        "ITC scales back FMCG expansion plans amid rural demand slowdown",
+        "ITC launches new premium personal care brand to deepen FMCG portfolio"
+      ],
+      "irrelevant_news_easy": [
+        "Larsen & Toubro's hydrocarbon division wins Middle East contract",
+        "Kotak Mahindra Bank reports rise in net interest margin",
+        "Vedanta announces capex plan for aluminium smelter expansion"
+      ],
+      "irrelevant_news_hard": [
+        "ITC's hotel business demerger completes, shares list separately",
+        "ITC's cigarette segment volumes rise on lower taxation in latest budget",
+        "ITC's agri-business segment sees export order increase"
+      ]
+    },
+    {
+      "id": "t8_dlf_realestate",
+      "ticker": "DLF.NS",
+      "company": "DLF Limited",
+      "thesis": "I bought this because premium housing demand in NCR will drive pre-sales growth",
+      "relevant_news": [
+        "DLF's premium housing project in Gurugram sells out within launch week",
+        "DLF reports slowdown in NCR premium housing bookings amid high mortgage rates",
+        "DLF launches new luxury residential tower targeting NCR's premium segment",
+        "DLF's pre-sales guidance raised on strong festive season demand"
+      ],
+      "irrelevant_news_easy": [
+        "Hindalco reports higher aluminium prices boosting quarterly margins",
+        "Axis Bank completes integration of Citibank's India retail portfolio",
+        "Dr Reddy's Labs announces new oncology drug launch in India"
+      ],
+      "irrelevant_news_hard": [
+        "DLF's commercial office leasing arm signs large IT-sector tenant",
+        "DLF's rental business arm reports steady occupancy rates",
+        "DLF announces board changes as part of governance overhaul"
+      ]
+    }
+  ]
+}
