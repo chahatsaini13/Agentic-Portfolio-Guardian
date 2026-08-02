@@ -85,9 +85,6 @@ Load sample portfolio (holdings, sectors, weights) → Compute weight of each se
 → Compute diversification/concentration score → Flag stocks/sectors that are over-exposed
 → Build structured risk summary
 ```
-*No contrastive learning here — this agent is purely computing numeric
-concentration metrics, not comparing/separating text or embeddings, so a
-learned similarity approach doesn't add value.*
 **Status: ⬜ Not Started**
 
 ## Week 5 — Market Intelligence Agent (with Contrastive Sentiment Tagging)
@@ -137,8 +134,7 @@ Define shared state structure for LangGraph → Add each of the 4 agents as a gr
 → Connect nodes in the right order/logic → Run the full graph
 → Merge all agent outputs into one combined insight → Handle failures/timeouts gracefully
 ```
-*No new contrastive learning work here — this week reuses the embeddings
-already trained in Weeks 3, 5, and 6 inside each agent node.*
+*Future enhancement (post-MVP): Add a self-reflection step to agent outputs (Reflexion-style): after Ollama returns a verdict, a second pass checks whether the reasoning actually cites specific data/news points vs being generic, and re-prompts if weak. Natural fit once Orchestrator exists.*
 **Status: ⬜ Not Started**
 
 ## Week 8 — Dashboard / UI Layer
