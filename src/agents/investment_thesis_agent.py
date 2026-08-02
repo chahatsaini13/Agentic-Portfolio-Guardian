@@ -17,10 +17,12 @@ import json
 import os
 import sys
 import re
+import datetime
 
 import requests
 import yfinance as yf
 from dotenv import load_dotenv
+from src.agents.news_filter import filter_news_by_relevance, DEFAULT_RELEVANCE_THRESHOLD
 
 load_dotenv()  # reads .env in the current directory, sets values into os.environ
 
@@ -79,7 +81,7 @@ def fetch_news(company: str, thesis: str, page_size: int = 5) -> list:
     resp = requests.get(
         "https://newsapi.org/v2/everything",
         params={
-            "q": f'{company} {keywords}',
+            "q": f'{company}',
             "language": "en",
             "sortBy": "publishedAt",
             "pageSize": page_size,
@@ -179,13 +181,42 @@ def parse_model_output(raw: str) -> dict:
         }
 
 
-def run(ticker: str, thesis: str) -> dict:
+def log_result(ticker, thesis, threshold, fetched_count, kept_count, result, log_path="results/week3_log.json"):
+    """Append this run's result to a JSON log file, for batch testing tonight."""
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    entry = {
+        "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
+        "ticker": ticker,
+        "thesis": thesis,
+        "threshold": threshold,
+        "articles_fetched": fetched_count,
+        "articles_kept": kept_count,
+        "thesis_status": result.get("thesis_status"),
+    }
+    if os.path.exists(log_path):
+        with open(log_path, "r") as f:
+            log = json.load(f)
+    else:
+        log = []
+    log.append(entry)
+    with open(log_path, "w") as f:
+        json.dump(log, f, indent=2)
+
+
+def run(ticker: str, thesis: str, threshold: float = DEFAULT_RELEVANCE_THRESHOLD) -> dict:
     print(f"[1/4] Fetching fundamentals for {ticker} ...")
     fundamentals = fetch_fundamentals(ticker)
 
     print(f"[2/4] Fetching news ...")
     company_query = fundamentals.get("long_name") or ticker.split(".")[0]
     news = fetch_news(company_query, thesis)
+    fetched_count = len(news)
+    print(f"  fetched {fetched_count} article(s) before filtering")
+
+    print(f"[2.5/4] Filtering news by relevance ...")
+    news = filter_news_by_relevance(thesis, news, threshold=threshold)
+    kept_count = len(news)
+    print(f"  kept {kept_count} of the fetched articles above threshold {threshold}")
 
     print(f"[3/4] Building prompt and calling Ollama ({OLLAMA_MODEL}) ...")
     prompt = build_prompt(ticker, thesis, fundamentals, news)
@@ -193,6 +224,7 @@ def run(ticker: str, thesis: str) -> dict:
 
     print(f"[4/4] Parsing model response ...")
     result = parse_model_output(raw_output)
+    log_result(ticker, thesis, threshold, fetched_count, kept_count, result)
     return result
 
 
@@ -200,9 +232,11 @@ def main():
     parser = argparse.ArgumentParser(description="Investment Thesis Agent")
     parser.add_argument("--ticker", required=True, help="e.g. TATAMOTORS.NS or RELIANCE.BO")
     parser.add_argument("--thesis", required=True, help="Your one-line investment thesis")
+    parser.add_argument("--threshold", type=float, default=DEFAULT_RELEVANCE_THRESHOLD,
+                     help="Minimum relevance score to keep an article (default: 0.35)")
     args = parser.parse_args()
 
-    result = run(args.ticker, args.thesis)
+    result = run(args.ticker, args.thesis, args.threshold)
 
     print("\n" + "=" * 60)
     print("THESIS CHECK RESULT")
