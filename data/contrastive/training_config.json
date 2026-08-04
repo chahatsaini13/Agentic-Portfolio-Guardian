@@ -1,0 +1,10 @@
+{
+  "model": "TODO - e.g. sentence-transformers/all-MiniLM-L6-v2",
+  "loss_function": "TODO - e.g. TripletMarginLoss / MultipleNegativesRankingLoss",
+  "margin": "TODO - only relevant for TripletMarginLoss",
+  "epochs": "TODO",
+  "learning_rate": "TODO",
+  "batch_size": "TODO",
+  "split_mode": "TODO - fixed | loto",
+  "notes": "Fill in once fine-tuning starts; keep updated if hyperparameters change during experimentation."
+}
