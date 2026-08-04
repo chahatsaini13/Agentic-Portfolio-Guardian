@@ -17,7 +17,7 @@ from src.agents.relevance_scorer import score_relevance
 # tonight, and again once Member 2's model swaps in (a contrastively
 # trained model should give better score separation, so the threshold may
 # need to move).
-DEFAULT_RELEVANCE_THRESHOLD = 0.35
+DEFAULT_RELEVANCE_THRESHOLD = 0.28
 
 
 def _article_text(article: dict) -> str:
@@ -37,16 +37,22 @@ def filter_news_by_relevance(
     scoring at or above `threshold`. Returns articles sorted by relevance
     (highest first), each annotated with its `relevance_score` so it's
     visible in the prompt and easy to sanity-check.
-
-    This is the swap point for Member 2's model: as long as whatever they
-    hand you satisfies score_relevance(thesis, news_text) -> float, this
-    function doesn't change at all.
     """
     scored = []
     for article in news:
         text = _article_text(article)
         score = score_relevance(thesis, text)
         scored.append({**article, "relevance_score": round(score, 4)})
+
+    # debug: print every article's score, kept or not, so threshold tuning
+    # isn't a guessing game - remove or gate behind a flag once 0.35 (or
+    # whatever replaces it) is actually validated
+    scored_sorted = sorted(scored, key=lambda a: a["relevance_score"], reverse=True)
+    print(f"  [debug] relevance scores for {len(scored_sorted)} article(s) (threshold={threshold}):")
+    for a in scored_sorted:
+        mark = "KEEP" if a["relevance_score"] >= threshold else "drop"
+        title = (a.get("title") or "")[:60]
+        print(f"    [{mark}] {a['relevance_score']:.4f}  {title}")
 
     kept = [a for a in scored if a["relevance_score"] >= threshold]
     kept.sort(key=lambda a: a["relevance_score"], reverse=True)

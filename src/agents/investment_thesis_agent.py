@@ -70,7 +70,7 @@ def extract_keywords(text: str) -> str:
 
     return " ".join(keywords)
 
-def fetch_news(company: str, thesis: str, page_size: int = 5) -> list:
+def fetch_news(company: str, thesis: str, page_size: int = 15) -> list:
     """Pull recent headlines relevant to the company and investment thesis.
     Returns a list of {title, description, source, published_at} dicts."""
     if not NEWSAPI_KEY:
@@ -81,7 +81,7 @@ def fetch_news(company: str, thesis: str, page_size: int = 5) -> list:
     resp = requests.get(
         "https://newsapi.org/v2/everything",
         params={
-            "q": f'{company}',
+            "q": f'{company} {keywords}',
             "language": "en",
             "sortBy": "publishedAt",
             "pageSize": page_size,
@@ -151,7 +151,12 @@ def call_ollama(prompt: str) -> str:
     """Send the prompt to a locally running Ollama model, non-streamed."""
     resp = requests.post(
         OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
+        json={
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+            "options": {"num_predict": 500},
+        },
         timeout=120,
     )
     resp.raise_for_status()

@@ -124,5 +124,104 @@
     "articles_fetched": 1,
     "articles_kept": 0,
     "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-08-04T23:01:26",
+    "ticker": "TMCV.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.35,
+    "articles_fetched": 1,
+    "articles_kept": 1,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-08-04T23:03:12",
+    "ticker": "RELIANCE.NS",
+    "thesis": "I bought this because Jio expansion will drive stable growth",
+    "threshold": 0.35,
+    "articles_fetched": 1,
+    "articles_kept": 1,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:10:55",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.35,
+    "articles_fetched": 6,
+    "articles_kept": 3,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-08-04T23:22:59",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive margins",
+    "threshold": 0.35,
+    "articles_fetched": 5,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:27:17",
+    "ticker": "SUNPHARMA.NS",
+    "thesis": "I bought this because US generic drug approvals will boost exports",
+    "threshold": 0.35,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:29:28",
+    "ticker": "ZOMATO.NS",
+    "thesis": "I bought this because quick commerce expansion will drive profitability",
+    "threshold": 0.35,
+    "articles_fetched": 1,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:36:52",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive margins",
+    "threshold": 0.28,
+    "articles_fetched": 5,
+    "articles_kept": 1,
+    "thesis_status": "PARSE_ERROR"
+  },
+  {
+    "timestamp": "2026-08-04T23:44:21",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive margins",
+    "threshold": 0.28,
+    "articles_fetched": 5,
+    "articles_kept": 1,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:46:40",
+    "ticker": "ZOMATO.NS",
+    "thesis": "I bought this because quick commerce expansion will drive profitability",
+    "threshold": 0.28,
+    "articles_fetched": 1,
+    "articles_kept": 1,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-04T23:57:54",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive margins",
+    "threshold": 0.0,
+    "articles_fetched": 5,
+    "articles_kept": 5,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-08-04T23:59:09",
+    "ticker": "ZOMATO.NS",
+    "thesis": "I bought this because quick commerce expansion will drive profitability",
+    "threshold": 0.0,
+    "articles_fetched": 1,
+    "articles_kept": 1,
+    "thesis_status": "WEAKENING"
   }
 ]
