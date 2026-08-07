@@ -75,10 +75,10 @@ Get stock price & fundamentals from yfinance → Get news using NewsAPI
 ## Week 4 — Portfolio Health Agent
 | Task | Owner |
 |---|---|
-| Load sample portfolio (holdings, sectors, weights) | Member 2 |
-| Compute diversification/concentration metrics | Member 2 |
-| Flag over-exposure to a sector/stock | Member 1 |
-| Output structured risk summary | Member 1 |
+| Load sample portfolio (holdings, sectors, weights) | Member 1 |
+| Compute diversification/concentration metrics | Member 1 |
+| Flag over-exposure to a sector/stock | Member 2 |
+| Output structured risk summary | Member 2 |
 **Pipeline:**
 ```
 Load sample portfolio (holdings, sectors, weights) → Compute weight of each sector/stock
