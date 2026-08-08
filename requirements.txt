@@ -2,3 +2,6 @@ yfinance
 requests
 python-dotenv
 sentence-transformers
+numpy
+pandas
+scipy
