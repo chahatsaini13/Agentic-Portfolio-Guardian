@@ -1,0 +1,13 @@
+ticker,sector,weight,asset_class,theme
+TCS.NS,IT,13,Equity,usd_export
+INFY.NS,IT,10,Equity,usd_export
+HDFCBANK.NS,Banking,14,Equity,
+ICICIBANK.NS,Banking,11,Equity,
+TMPV.NS,Auto,9,Equity,ev_green
+MARUTI.NS,Auto,7,Equity,
+SUNPHARMA.NS,Pharma,8,Equity,usd_export
+CIPLA.NS,Pharma,6,Equity,usd_export
+ADANIGREEN.NS,Power,8,Equity,ev_green
+ITC.NS,FMCG,6,Equity,
+HINDUNILVR.NS,FMCG,4,Equity,
+DLF.NS,Realty,4,Equity,
