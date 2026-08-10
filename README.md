@@ -25,8 +25,8 @@ traceable.
 
 | Agent | Role | Status |
 |---|---|---|
-| Investment Thesis Agent | Tracks whether the original reason a user invested still holds against current data | In progress |
-| Portfolio Health Agent | Evaluates diversification and risk exposure across the full portfolio | Not started |
+| Investment Thesis Agent | Tracks whether the original reason a user invested still holds against current data | Completed |
+| Portfolio Health Agent | Evaluates diversification and risk exposure across the full portfolio | In progress |
 | Market Intelligence Agent | Reads live news/market updates and summarizes what's relevant to each holding | Not started |
 | Early Warning Agent | Flags red flags: management changes, litigation, credit downgrades | Not started |
 | Orchestrator Agent | Combines all four agents' outputs into one coherent, user-facing insight | Not started |
