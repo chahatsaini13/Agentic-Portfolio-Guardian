@@ -1,4 +1,4 @@
-# ADR 0003: Extend Portfolio Health Agent with full analytics scope
+# ADR 0004: Extend Portfolio Health Agent with full analytics scope
 
 ## Status
 Accepted

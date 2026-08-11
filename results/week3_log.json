@@ -223,5 +223,50 @@
     "articles_fetched": 1,
     "articles_kept": 1,
     "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-10T00:33:41",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 4,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-10T00:40:29",
+    "ticker": "RELIANCE.NS",
+    "thesis": "I bought this because Jio expansion will drive stable growth",
+    "threshold": 0.5,
+    "articles_fetched": 1,
+    "articles_kept": 1,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-10T00:42:33",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 6,
+    "articles_kept": 3,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-08-10T00:43:46",
+    "ticker": "TATAMOTORS.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-08-10T00:51:12",
+    "ticker": "TMPV.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
   }
 ]
