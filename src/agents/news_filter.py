@@ -17,7 +17,7 @@ from src.agents.relevance_scorer import score_relevance
 # tonight, and again once Member 2's model swaps in (a contrastively
 # trained model should give better score separation, so the threshold may
 # need to move).
-DEFAULT_RELEVANCE_THRESHOLD = 0.28
+DEFAULT_RELEVANCE_THRESHOLD = 0.5
 
 
 def _article_text(article: dict) -> str:

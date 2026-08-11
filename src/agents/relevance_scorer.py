@@ -23,7 +23,7 @@ Two integration paths for Member 2's real model, once handed over:
 
 from sentence_transformers import SentenceTransformer, util
 
-_MODEL_NAME = "all-MiniLM-L6-v2"
+_MODEL_NAME = "navneet11/contrastive-relevance-v1" 
 
 _model = None  
 
