@@ -35,8 +35,21 @@ traceable.
 - Python 3.x
 - LangGraph (agent orchestration)
 - LLM: Ollama v0.32.4 (Local) — `llama3.2:latest`
+- Embeddings: sentence-transformers, contrastively fine-tuned relevance model
+  hosted on Hugging Face Hub
 - Data: yfinance, NewsAPI
 - Dashboard/UI: TBD — agents output structured JSON; UI framework to be decided
+
+## Relevance filtering
+News is filtered for relevance to each investment thesis using embedding
+similarity rather than keyword matching, which fails on "hard negative"
+cases (news about the same company that's unrelated to the specific
+thesis). A contrastively fine-tuned model
+(`navneet11/contrastive-relevance-v1`, hosted privately on Hugging Face
+Hub) replaced an initial generic-embedding placeholder after evaluation
+showed clean separation between relevant and irrelevant news, including
+on hard negatives. See `docs/decisions/0002-...MD` and
+`docs/decisions/0003-...MD` for the full methodology and evaluation.
 
 ## Data sources
 - Live market/news: yfinance (NSE/BSE), NewsAPI
@@ -50,6 +63,11 @@ traceable.
 ## Limitations
 - NewsAPI free tier restricts article recency and request volume
 - yfinance can be inconsistent/rate-limited for NSE/BSE tickers
+- When both fundamentals and news data are sparse or unavailable, the LLM
+  may produce confident-sounding but unsubstantiated claims rather than
+  flagging insufficient data (observed during testing, not yet mitigated)
+- Contrastive relevance model trained on a small dataset (8 investment
+  theses) - strong held-out evaluation results, but not yet validated at scale
 - Not intended as investment advice; outputs are informational only
 
 ## Decision log
