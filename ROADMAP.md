@@ -70,7 +70,7 @@ Get stock price & fundamentals from yfinance → Get news using NewsAPI
 → Send prompt to local Ollama model → Parse model response into JSON
 → Validate output matches expected structure
 ```
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 4 — Portfolio Health Agent
 | Task | Owner |
@@ -85,7 +85,7 @@ Load sample portfolio (holdings, sectors, weights) → Compute weight of each se
 → Compute diversification/concentration score → Flag stocks/sectors that are over-exposed
 → Build structured risk summary
 ```
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 5 — Market Intelligence Agent (with Contrastive Sentiment Tagging)
 | Task | Owner |
