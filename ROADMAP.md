@@ -102,7 +102,7 @@ sentence encoder → Tag sentiment via nearest cluster in embedding space
 → Compare against Financial PhraseBank labels for accuracy
 → Summarize key developments using local LLM → Build structured summary output
 ```
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 6 — Early Warning Agent (Contrastive Anomaly Detection)
 | Task | Owner |
