@@ -1,5 +1,5 @@
 """
-Market Intelligence Agent - Portfolio Guardian (Week 5)
+Market Intelligence Agent - Portfolio Guardian 
 
 Third agent in the pipeline. For every holding in the portfolio, this:
   1. Loads holdings via load_portfolio() (same loader Portfolio Health
@@ -193,7 +193,7 @@ def run_for_holding(ticker: str) -> dict:
     print(f"  [2/5] Fetching news for {company} ...")
     news = fetch_news(company)
 
-    print(f"  [3/4] Filtering for relevance to {company} ...")
+    print(f"  [3/5] Filtering for relevance to {company} ...")
     relevant_news = filter_news_by_relevance(company, news, threshold=NEWS_RELEVANCE_THRESHOLD)
     # relevance_score was only needed for the filter step's debug output -
     # drop it here so it doesn't clutter the final per-holding JSON.
