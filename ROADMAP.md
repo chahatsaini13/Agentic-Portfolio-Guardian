@@ -120,7 +120,7 @@ Get recent news for each holding → Embed news using contrastively trained enco
 → Cross-check against rule-based keyword detection → Score severity/urgency using LLM
 → Build structured alert output
 ```
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 7 — Orchestrator Agent (LangGraph Integration)
 | Task | Owner |

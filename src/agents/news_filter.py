@@ -1,5 +1,5 @@
 """
-News filtering by thesis relevance (Week 3).
+News filtering by thesis relevance
 
 Replaces the Week 2 keyword-only filter with embedding-similarity
 filtering. Deliberately kept as its own module (not stuffed into

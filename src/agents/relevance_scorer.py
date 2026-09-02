@@ -1,5 +1,5 @@
 """
-Relevance scoring for news filtering (Week 3).
+Relevance scoring for news filtering
 
 This is a PLACEHOLDER implementation using an off-the-shelf pretrained
 sentence-transformer + cosine similarity. Member 2 is separately training

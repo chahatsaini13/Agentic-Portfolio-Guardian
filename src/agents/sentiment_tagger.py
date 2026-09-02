@@ -1,5 +1,5 @@
 """
-Sentiment tagging for the Market Intelligence Agent (Week 5) -
+Sentiment tagging for the Market Intelligence Agent -
 contrastive embedding version, replacing the VADER placeholder.
 
 Same PLACEHOLDER-SWAP pattern as relevance_scorer.py: this module's only
