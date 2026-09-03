@@ -1,10 +1,10 @@
 # ADR 0005: Market Intelligence Agent - sentiment placeholder and relevance filter reuse
 
 ## Status
-Proposed - Member 1's portion (agent pipeline, filtering, VADER placeholder)
+Accepted - Member 1's portion (agent pipeline, filtering, VADER placeholder)
 is complete and validated below. Member 2's portion (contrastive sentiment
-model + baseline comparison) is **not yet integrated** - see "For Member 2"
-section at the end. Status moves to Accepted once that's merged.
+model, accuracy comparison) was completed in ADR 0006 - see that file for
+the swap-in confirmation and validation numbers.
 
 ## Context
 Week 5 (Market Intelligence Agent) needs to tag sentiment on recent news
@@ -124,28 +124,3 @@ prompt-level instruction to Ollama to flag venue-specific caveats.
   run.
 
 ---
-
-## For Member 2: to complete this ADR
-
-This ADR is intentionally left open on your half. When your contrastive
-sentiment model is ready, please add a section here (or a follow-up ADR
-this one links to) covering:
-
-1. **Swap-in.** Confirm whether `tag_sentiment()`'s body was replaced
-   directly, or `_get_analyzer()` was pointed at a saved
-   checkpoint/cluster-centroid file - same two paths `relevance_scorer.py`
-   documents for its own handoff.
-2. **Accuracy comparison vs. VADER baseline**, evaluated against
-   Financial PhraseBank labels - same table format as ADR 0002's
-   before/after comparison:
-
-   | | VADER (baseline) | Contrastive model |
-   |---|---|---|
-   | Accuracy on Financial PhraseBank | ? | ? |
-   | Notes | | |
-
-3. **Any threshold/cluster-boundary tuning** your model needed, and
-   whether `NEWS_RELEVANCE_THRESHOLD = 0.3` (the separate relevance
-   filter, not sentiment) should also move once your embeddings replace
-   the generic model there too, per ADR 0002's prediction that a
-   purpose-trained model should give better score separation.
