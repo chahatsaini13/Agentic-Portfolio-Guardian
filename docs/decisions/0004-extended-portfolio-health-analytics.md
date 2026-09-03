@@ -16,9 +16,10 @@ Ratio), correlation/covariance analysis, MPT portfolio optimization
 estimates, and an AI-generated health summary.
 
 Cross-checked against `ROADMAP.md`: most of this had no existing home in
-Weeks 4-9. Two subsections were added to the roadmap (Portfolio Analytics
-under Week 4, Reporting under Week 8) before any code was written, so the
-scope expansion is tracked, not silent.
+Weeks 4-9. `ROADMAP.md` itself was not edited to add new subsections for
+this expanded scope - the cross-check was done to confirm the expansion
+didn't silently duplicate or conflict with planned Week 4-9 work, and this
+ADR is the record of that expansion instead.
 
 ## Decision
 Extend `portfolio_health_agent.py` in place rather than starting a new
