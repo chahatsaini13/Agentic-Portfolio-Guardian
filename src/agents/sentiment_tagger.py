@@ -46,7 +46,7 @@ from collections import defaultdict
 
 from sentence_transformers import SentenceTransformer, util
 
-_MODEL_NAME = os.environ.get("SENTIMENT_MODEL_PATH", "models/contrastive_sentiment_v1")
+_MODEL_NAME = os.environ.get("SENTIMENT_MODEL_PATH", "navneet11/contrastive-sentiment-v1")
 
 _TRIPLETS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "..",

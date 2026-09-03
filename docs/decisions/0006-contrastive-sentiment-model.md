@@ -88,6 +88,26 @@ what `evaluate_sentiment_model.py` used, so the validated eval numbers
 below reflect the same centroid-construction process actually running in
 production, not a different one that happens to be untested.
 
+### Hosting: Hugging Face Hub (private repo)
+Following the same reasoning ADR 0003 gave for `navneet11/contrastive-relevance-v1`:
+the checkpoint is too large to commit cleanly to a Git repo (models/ is in
+.gitignore), and a private Hugging Face Hub repo gives `SentenceTransformer("org/model-name")`
+loading with zero code difference from loading a local path. Uploaded to
+`navneet11/contrastive-sentiment-v1` (private, same account/org as the
+relevance model) for the same commercialization-interest reason ADR 0003
+gave.
+
+`sentiment_tagger.py`'s `_MODEL_NAME` default was updated from
+`"models/contrastive_sentiment_v1"` to `"navneet11/contrastive-sentiment-v1"`
+- no other file needed to change, confirming the same swap-point design
+ADR 0003 validated for the relevance model. `SENTIMENT_MODEL_PATH` env var
+still works for anyone who wants to point at a local checkpoint instead
+(e.g. during retraining/eval).
+
+This closes the reproducibility gap flagged in the repo audit: a fresh
+clone of this repo can now run the Market Intelligence Agent without
+needing the checkpoint manually copied in from wherever it was trained.
+
 ## Validation
 
 ### Accuracy vs VADER baseline
