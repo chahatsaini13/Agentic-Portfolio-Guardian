@@ -152,6 +152,7 @@ def run_for_holding(ticker: str) -> list:
             "headline": article.get("title"),
             "severity": severity["severity"],
             "reasoning": severity["reasoning"],
+            "signal_agreement": article.get("signal_agreement"),
         })
 
     return alerts

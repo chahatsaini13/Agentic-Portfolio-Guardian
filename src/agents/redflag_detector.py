@@ -3,14 +3,25 @@ Red-flag detection for the Early Warning Agent -
 contrastive-embedding nearest-centroid version, replacing the
 keyword-matching placeholder documented in ADR 0007.
 
-Same PLACEHOLDER-SWAP pattern as sentiment_tagger.py: this module's only
-public contract is
+Same PLACEHOLDER-SWAP pattern as sentiment_tagger.py: this module's core
+swappable contract is still
 
     redflag_score(text: str) -> float   # 0.0 (routine) .. 1.0 (red-flag)
 
-Member 1's early_warning_agent.py calls exactly this function (via
-is_red_flag()) and classify_flag_type() for category labels - neither of
-those two functions changes here, only the body of redflag_score().
+UPDATE (ADR 0009): ROADMAP.md's Week 6 design always called for two
+signals - the contrastive embedding AND a rule-based keyword cross-check
+- but ADR 0008's swap fully replaced the keyword signal instead of
+keeping it as a second opinion. The keyword logic (same categories/terms
+as the original ADR 0007 placeholder, now living in
+redflag_detector_keyword_backup.py) is restored here as an independent
+signal via check_signal_agreement(). is_red_flag() now flags an article
+if EITHER signal clears its own threshold - it no longer relies solely
+on the embedding score. See ADR 0009 for the real evaluation numbers on
+data/redflag/val_sentences.jsonl.
+
+Member 1's early_warning_agent.py calls check_signal_agreement() (via
+is_red_flag() for a plain bool, or directly for the full signal
+breakdown) and classify_flag_type() for category labels.
 
 HOW IT WORKS (nearest-centroid, NOT a fine-tuned model - see ADR 0008):
 Unlike sentiment_tagger.py, the embedding model here is used AS-IS
@@ -152,10 +163,72 @@ def redflag_score(text: str) -> float:
     return float(max(0.0, min(1.0, score)))
 
 
+def keyword_redflag_score(text: str) -> float:
+    """
+    Rule-based 0.0/1.0 score - same _REDFLAG_KEYWORDS lookup
+    classify_flag_type() already uses, so there's exactly one keyword
+    list in this file, not a second copy. Restored as an independent
+    second opinion alongside redflag_score() per ADR 0009 - ROADMAP.md's
+    Week 6 design always called for both signals, not a full replacement.
+    """
+    if not text or not text.strip():
+        return 0.0
+
+    lowered = text.lower()
+    for keywords in _REDFLAG_KEYWORDS.values():
+        if any(kw in lowered for kw in keywords):
+            return 1.0
+    return 0.0
+
+
+def check_signal_agreement(text: str, embedding_threshold: float = _REDFLAG_THRESHOLD,
+                            keyword_threshold: float = 1.0) -> dict:
+    """
+    Runs both signals - contrastive embedding (redflag_score) and
+    rule-based keyword (keyword_redflag_score) - and reports whether they
+    agree. An article is flagged if EITHER signal independently clears
+    its own threshold (see ADR 0009); signal_agreement tells the caller
+    how much to trust that call:
+
+        "both"           - embedding AND keyword both fired
+        "embedding_only" - only the embedding score cleared threshold
+        "keyword_only"   - only a keyword matched
+        "neither"        - not flagged by either signal
+
+    early_warning_agent.py uses this (via is_red_flag() for a plain bool,
+    or directly for the full breakdown) so downstream severity scoring
+    can treat "both" alerts with more confidence than single-signal ones.
+    """
+    embedding_score = redflag_score(text)
+    keyword_score = keyword_redflag_score(text)
+    embedding_flagged = embedding_score >= embedding_threshold
+    keyword_flagged = keyword_score >= keyword_threshold
+
+    if embedding_flagged and keyword_flagged:
+        agreement = "both"
+    elif embedding_flagged:
+        agreement = "embedding_only"
+    elif keyword_flagged:
+        agreement = "keyword_only"
+    else:
+        agreement = "neither"
+
+    return {
+        "is_red_flag": embedding_flagged or keyword_flagged,
+        "embedding_score": embedding_score,
+        "embedding_flagged": embedding_flagged,
+        "keyword_flagged": keyword_flagged,
+        "signal_agreement": agreement,
+    }
+
+
 def is_red_flag(text: str, threshold: float = _REDFLAG_THRESHOLD) -> bool:
-    """Thin threshold wrapper around redflag_score() - unchanged contract
-    from the keyword-based version."""
-    return redflag_score(text) >= threshold
+    """Thin wrapper around check_signal_agreement() - flags if EITHER the
+    embedding score clears `threshold` OR the keyword rule fires (see
+    ADR 0009). Contract (text, threshold) -> bool is unchanged from the
+    embedding-only version; callers who only need the boolean don't need
+    to change anything."""
+    return check_signal_agreement(text, embedding_threshold=threshold)["is_red_flag"]
 
 
 def classify_flag_type(text: str) -> str | None:
