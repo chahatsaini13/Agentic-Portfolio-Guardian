@@ -1,0 +1,2 @@
+{"label": "baseline", "model": "sentence-transformers/all-MiniLM-L6-v2", "n_sentences": 970, "silhouette_vs_true_labels": -0.005801241844892502, "silhouette_vs_kmeans_clusters": 0.06813254952430725, "purity_kmeans": 0.5938144329896907, "n_clusters": 3}
+{"label": "contrastive", "model": "models\\contrastive_sentiment_v1", "n_sentences": 970, "silhouette_vs_true_labels": 0.3132866621017456, "silhouette_vs_kmeans_clusters": 0.45252496004104614, "purity_kmeans": 0.8257731958762886, "n_clusters": 3}
