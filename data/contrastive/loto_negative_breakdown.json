@@ -1,0 +1,71 @@
+{
+  "folds": [
+    {
+      "held_out": "t1_tatamotors_ev",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 1.0,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 1.0
+    },
+    {
+      "held_out": "t2_reliance_jio",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 1.0,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 1.0
+    },
+    {
+      "held_out": "t3_infosys_ai",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 1.0,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 1.0
+    },
+    {
+      "held_out": "t4_hdfcbank_retail",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 1.0,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 1.0
+    },
+    {
+      "held_out": "t5_sunpharma_generics",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 1.0,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 1.0
+    },
+    {
+      "held_out": "t6_adanigreen_renewables",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 0.9583333134651184,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 0.9166666865348816
+    },
+    {
+      "held_out": "t7_itc_fmcg",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 0.875,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 0.75
+    },
+    {
+      "held_out": "t8_dlf_realestate",
+      "n_val_easy": 12,
+      "n_val_hard": 12,
+      "combined_accuracy": 0.9166666865348816,
+      "easy_accuracy": 1.0,
+      "hard_accuracy": 0.8333333134651184
+    }
+  ],
+  "average_combined_accuracy": 0.96875,
+  "average_easy_accuracy": 1.0,
+  "average_hard_accuracy": 0.9375
+}
