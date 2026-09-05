@@ -26,13 +26,14 @@ Usage:
 import argparse
 import json
 import os
+import re
 
 import requests
 from dotenv import load_dotenv
 
 from src.agents.portfolio_health_agent import load_portfolio
 from src.agents.market_intelligence_agent import fetch_company_name, fetch_news
-from src.agents.redflag_detector import redflag_score, is_red_flag, classify_flag_type
+from src.agents.redflag_detector import check_signal_agreement, is_red_flag, classify_flag_type
 
 load_dotenv()
 
@@ -43,16 +44,26 @@ OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1")
 def detect_flags(news: list) -> list:
     """Score every article, keep only the ones over threshold, tag each
     with its flag_type. Annotate-in-place style, same as
-    market_intelligence_agent.py's tag_news_sentiment()."""
+    market_intelligence_agent.py's tag_news_sentiment().
+
+    Updated (Day 2, Sep 6) to call check_signal_agreement() instead of
+    is_red_flag()+redflag_score() separately - ADR 0009 added the
+    signal_agreement breakdown (embedding vs keyword) but the original
+    integration only wired the output SHAPE (a signal_agreement key was
+    added downstream in run_for_holding()) without ever populating it -
+    every alert was silently getting signal_agreement=None. This fixes
+    that by actually calling the function that computes it."""
+
     flagged = []
     for article in news:
         text = f"{article.get('title') or ''}. {article.get('description') or ''}".strip()
-        score = redflag_score(text)
-        if is_red_flag(text):
+        agreement = check_signal_agreement(text)
+        if agreement["is_red_flag"]:
             flagged.append({
                 **article,
-                "redflag_score": score,
+                "redflag_score": agreement["embedding_score"],
                 "flag_type": classify_flag_type(text),
+                "signal_agreement": agreement["signal_agreement"],
             })
     return flagged
 
@@ -100,7 +111,14 @@ def parse_severity_output(raw: str) -> dict:
     """Same strip-then-parse-then-fail-loudly approach as every other
     agent's parse function. Falls back to MEDIUM rather than silently
     dropping the alert - an unparsed severity is still a flagged event,
-    better to surface it at a middling severity than to lose it."""
+    better to surface it at a middling severity than to lose it.
+
+    Added a regex-based recovery step (Day 2, Sep 6) after observing
+    Ollama occasionally truncate its JSON output mid-string (missing
+    closing brace/quote) - the plain json.loads() fails, but the
+    severity/reasoning values are usually still readable via regex on
+    the raw text, so this recovers them instead of falling all the way
+    back to the raw-dump fallback."""
     cleaned = raw.strip()
     if cleaned.startswith("```"):
         cleaned = cleaned.strip("`")
@@ -113,9 +131,21 @@ def parse_severity_output(raw: str) -> dict:
             "reasoning": parsed.get("reasoning", ""),
         }
     except json.JSONDecodeError:
-        print("[warn] Model did not return clean JSON. Raw output below:\n")
+        pass
+
+    # Recovery: pull "severity": "..." and "reasoning": "..." out with
+    # regex even if the surrounding JSON is truncated/malformed.
+    severity_match = re.search(r'"severity"\s*:\s*"(LOW|MEDIUM|HIGH)"', cleaned)
+    reasoning_match = re.search(r'"reasoning"\s*:\s*"([^"]*(?:\\.[^"]*)*)"', cleaned)
+    if severity_match:
+        reasoning_text = reasoning_match.group(1) if reasoning_match else cleaned
+        print("[warn] Model output wasn't valid JSON but was recovered via regex. Raw output below:\n")
         print(raw)
-        return {"severity": "MEDIUM", "reasoning": raw.strip()}
+        return {"severity": severity_match.group(1), "reasoning": reasoning_text}
+
+    print("[warn] Model did not return clean JSON, and regex recovery also failed. Raw output below:\n")
+    print(raw)
+    return {"severity": "MEDIUM", "reasoning": raw.strip()}
 
 
 def score_severity(ticker: str, company: str, article: dict) -> dict:

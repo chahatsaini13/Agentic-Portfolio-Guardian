@@ -367,5 +367,122 @@
     "articles_fetched": 0,
     "articles_kept": 0,
     "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-04T21:30:04",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-04T21:30:35",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-04T21:31:21",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T10:08:17",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T10:08:36",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T10:09:06",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T11:20:44",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T11:21:08",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T11:21:44",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T11:32:59",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T11:33:27",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T11:33:56",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T11:34:19",
+    "ticker": "ICICIBANK.NS",
+    "thesis": "I bought this because retail loan growth and digital banking adoption will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
   }
 ]
