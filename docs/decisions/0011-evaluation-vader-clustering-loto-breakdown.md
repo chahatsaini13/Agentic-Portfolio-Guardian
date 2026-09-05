@@ -1,4 +1,4 @@
-# ADR 0011: Week 9 Evaluation - VADER Baseline, Clustering Quality, and LOTO Negative-Type Breakdown
+# ADR 0011: Evaluation - VADER Baseline, Clustering Quality, and LOTO Negative-Type Breakdown
 
 ## Status
 Accepted
