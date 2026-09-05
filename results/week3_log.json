@@ -484,5 +484,221 @@
     "articles_fetched": 0,
     "articles_kept": 0,
     "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:39:10",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:39:30",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:40:02",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:40:27",
+    "ticker": "ICICIBANK.NS",
+    "thesis": "I bought this because retail loan growth and digital banking adoption will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:40:49",
+    "ticker": "TMPV.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:41:12",
+    "ticker": "MARUTI.NS",
+    "thesis": "I bought this because SUV segment expansion will drive market share and margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T17:41:36",
+    "ticker": "HINDUNILVR.NS",
+    "thesis": "I bought this because rural demand recovery will drive steady volume growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T17:41:54",
+    "ticker": "ITC.NS",
+    "thesis": "I bought this because FMCG demand recovery will boost margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T18:15:26",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "HOLDS"
+  },
+  {
+    "timestamp": "2026-09-05T18:15:52",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T18:16:26",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T18:16:54",
+    "ticker": "ICICIBANK.NS",
+    "thesis": "I bought this because retail loan growth and digital banking adoption will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T18:17:21",
+    "ticker": "TMPV.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T18:17:44",
+    "ticker": "MARUTI.NS",
+    "thesis": "I bought this because SUV segment expansion will drive market share and margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T18:18:10",
+    "ticker": "HINDUNILVR.NS",
+    "thesis": "I bought this because rural demand recovery will drive steady volume growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T18:18:31",
+    "ticker": "ITC.NS",
+    "thesis": "I bought this because FMCG demand recovery will boost margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T23:51:55",
+    "ticker": "TCS.NS",
+    "thesis": "I bought this because digital transformation deals will grow steadily",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T23:52:19",
+    "ticker": "INFY.NS",
+    "thesis": "I bought this because AI services will accelerate revenue growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T23:53:01",
+    "ticker": "HDFCBANK.NS",
+    "thesis": "I bought this because retail credit growth will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 3,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T23:53:25",
+    "ticker": "ICICIBANK.NS",
+    "thesis": "I bought this because retail loan growth and digital banking adoption will drive earnings",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T23:53:48",
+    "ticker": "TMPV.NS",
+    "thesis": "I bought this because EV adoption will drive demand",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "BROKEN"
+  },
+  {
+    "timestamp": "2026-09-05T23:54:11",
+    "ticker": "MARUTI.NS",
+    "thesis": "I bought this because SUV segment expansion will drive market share and margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T23:54:33",
+    "ticker": "HINDUNILVR.NS",
+    "thesis": "I bought this because rural demand recovery will drive steady volume growth",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
+  },
+  {
+    "timestamp": "2026-09-05T23:54:55",
+    "ticker": "ITC.NS",
+    "thesis": "I bought this because FMCG demand recovery will boost margins",
+    "threshold": 0.5,
+    "articles_fetched": 0,
+    "articles_kept": 0,
+    "thesis_status": "WEAKENING"
   }
 ]

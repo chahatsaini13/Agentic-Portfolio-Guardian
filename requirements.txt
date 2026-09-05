@@ -8,4 +8,6 @@ scipy
 vaderSentiment
 scikit-learn
 langgraph
+streamlit
+plotly
 
