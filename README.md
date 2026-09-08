@@ -56,9 +56,50 @@ on hard negatives. See `docs/decisions/0002-...MD` and
 - Financial PhraseBank (~4,840 expert-labeled sentences) — sentiment benchmark
 - Historical NSE data (1,700+ stocks, 1990–2021) — backtesting
 
+
 ## Evaluation
-- Sentiment classification accuracy benchmarked against Financial PhraseBank
-- Thesis-flip detection validated against historical NSE data (1990–2021)
+
+Full methodology and per-fold numbers are in `docs/decisions/0011-evaluation-vader-clustering-loto-breakdown.md`.
+
+### Sentiment tagging (Financial PhraseBank, 970 held-out sentences)
+| Method | Accuracy |
+|---|---|
+| VADER (lexicon, ±0.05 cutoff) | 52.99% (514/970) |
+| Generic embedding (untrained, nearest-centroid) | 65.36% (634/970) |
+| Contrastive embedding (fine-tuned, nearest-centroid) | **83.71% (812/970)** |
+
+Notably, VADER scores *below* the untrained generic-embedding baseline -
+not the result you'd expect from a purpose-built sentiment tool. Most
+likely cause: VADER's lexicon is tuned for informal/social-media text,
+while PhraseBank sentences use flat financial language that doesn't
+trigger it well, especially the majority `neutral` class. Not
+root-caused further (e.g. no per-class VADER confusion matrix yet).
+
+### Embedding clustering quality (same val set)
+| Metric | Baseline (generic) | Contrastive (fine-tuned) |
+|---|---|---|
+| Silhouette (vs true labels) | -0.0058 | 0.3133 |
+| Silhouette (vs KMeans clusters) | 0.0681 | 0.4525 |
+| Purity (KMeans k=3 vs true labels) | 0.5938 | 0.8258 |
+
+The baseline's near-zero silhouette means the 3 sentiment classes are
+essentially unseparated in the untrained embedding space - consistent
+with its weaker classification accuracy above.
+
+### Relevance model: LOTO per-fold, easy vs hard negatives
+Average across 8 leave-one-thesis-out folds: **96.88% combined**
+(matches ADR 0003's original blended number), but broken down:
+- Easy negatives: **100%** in every fold
+- Hard negatives: **93.75% average**, but not uniform - `t6_adanigreen_renewables`
+  (91.7%), `t7_itc_fmcg` (75.0%), and `t8_dlf_realestate` (83.3%) are
+  meaningfully weaker than the other 5 folds, which hit 100% hard-negative
+  accuracy.
+
+This means the strong headline number hides a real, uneven weak spot
+specifically on the same-company/thesis-irrelevant case the model was
+built to handle - not yet root-caused (small 12-triplet-per-fold sample,
+or something specific to those sectors/theses). Flagged as an open item,
+not treated as resolved.
 
 ## Limitations
 - NewsAPI free tier restricts article recency and request volume
