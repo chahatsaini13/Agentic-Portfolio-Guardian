@@ -16,20 +16,26 @@ graph TD
     B[Portfolio Health Agent] --> O
     C[Market Intelligence Agent] --> O
     D[Early Warning Agent] --> O
-    O --> U[User-facing Insight]
+    O --> U[Streamlit Dashboard]
 ```
 
 Four specialized agents coordinated by a central Orchestrator, built with
-LangGraph so state and control flow between agents stays explicit and
-traceable.
+LangGraph (`src/orchestrator.py`) so state and control flow between
+agents stays explicit and traceable. The graph runs sequentially —
+Portfolio Health → Thesis → Market Intelligence → Early Warning → Merge
+— and each node catches its own failures (Ollama unreachable, missing
+thesis, no news) and records them in a shared `errors` list rather than
+crashing the run, so partial results still make it to the dashboard. See
+`docs/decisions/` for the ADR behind each agent and `app.py` for how the
+merged output is rendered.
 
 | Agent | Role | Status |
 |---|---|---|
 | Investment Thesis Agent | Tracks whether the original reason a user invested still holds against current data | Completed |
 | Portfolio Health Agent | Evaluates diversification and risk exposure across the full portfolio | Completed |
-| Market Intelligence Agent | Reads live news/market updates and summarizes what's relevant to each holding | In progress |
-| Early Warning Agent | Flags red flags: management changes, litigation, credit downgrades | Not started |
-| Orchestrator Agent | Combines all four agents' outputs into one coherent, user-facing insight | Not started |
+| Market Intelligence Agent | Reads live news/market updates and summarizes what's relevant to each holding | Completed |
+| Early Warning Agent | Flags red flags: management changes, litigation, credit downgrades | Completed |
+| Orchestrator Agent | Combines all four agents' outputs into one coherent, user-facing insight via LangGraph | Completed |
 
 ## Tech stack
 - Python 3.x
@@ -38,7 +44,7 @@ traceable.
 - Embeddings: sentence-transformers, contrastively fine-tuned relevance model
   hosted on Hugging Face Hub
 - Data: yfinance, NewsAPI
-- Dashboard/UI: TBD — agents output structured JSON; UI framework to be decided
+- Dashboard/UI: Streamlit + Plotly
 
 ## Relevance filtering
 News is filtered for relevance to each investment thesis using embedding
@@ -120,7 +126,10 @@ the format. Read these before making changes; they capture *why*, not just
 ## Project structure
 ```
 src/agents/            individual agent implementations
+src/orchestrator.py     LangGraph orchestrator wiring all 4 agents together
+app.py                  Streamlit dashboard - reads orchestrator output
 docs/decisions/         ADRs — one file per decision
+data/theses.json        per-ticker investment theses (one line each)
 requirements.txt
 .env.example            copy to .env and fill in your API keys
 ```
@@ -128,6 +137,36 @@ requirements.txt
 ## Setup
 ```
 pip install -r requirements.txt
-cp .env.example .env   # then fill in your keys
-python src/agents/investment_thesis_agent.py
+cp .env.example .env # then fill in your keys
+```
+## Running the full app
+Make sure Ollama is running (`ollama serve`, or the desktop app) before
+starting the dashboard — the Thesis and Market Intelligence sections
+depend on it for reasoning/summaries; the app still runs and degrades
+gracefully if Ollama is unreachable, but you'll only see Portfolio
+Health populated.
+
+```
+streamlit run app.py
+```
+
+The app opens with a single-screen **Dashboard** page (portfolio health
+score, allocation, performance/risk, market pulse, alert strip) that's
+intentionally non-scrolling — it's meant to be read at a glance. Click
+"Run Full Analysis" to trigger a full orchestrator run across every
+holding in the portfolio (this calls Ollama multiple times per holding,
+so it can take a few minutes on CPU).
+
+Full per-holding detail — thesis reasoning, market sentiment/summary, and
+red-flag alerts — lives on the separate **Thesis** page, reachable via
+the sidebar or the "View full thesis monitor →" link on the dashboard.
+A **Settings** page lets you point at a different portfolio CSV, edit
+per-ticker theses, and toggle whether live price history / market
+metadata get fetched (useful for faster iteration during development).
+
+You can also run the orchestrator standalone without the UI, for faster
+debugging:
+```
+python -m src.orchestrator --file data/sample_portfolio.csv
+python -m src.orchestrator --file data/sample_portfolio.csv --no-prices --no-market
 ```
