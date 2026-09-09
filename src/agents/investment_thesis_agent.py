@@ -157,7 +157,8 @@ def call_ollama(prompt: str) -> str:
             "stream": False,
             "options": {"num_predict": 500},
         },
-        timeout=120,
+        timeout=300,
+        
     )
     resp.raise_for_status()
     data = resp.json()
