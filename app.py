@@ -86,6 +86,23 @@ def inject_css(no_scroll: bool):
     }}
     {scroll_lock}
 
+    /* ---- force sidebar permanently visible, ignore Streamlit's own
+       collapsed/expanded state entirely - sidesteps the toggle-button
+       visibility bug rather than fighting it ---- */
+    section[data-testid="stSidebar"] {{
+        transform: none !important;
+        visibility: visible !important;
+        width: 21rem !important;
+        min-width: 21rem !important;
+        max-width: 21rem !important;
+    }}
+    section[data-testid="stSidebar"] > div:first-child {{
+        transform: none !important;
+    }}
+    [data-testid="collapsedControl"] {{
+        display: none !important;
+    }}
+
     /* ---- floating glass sidebar ---- */
     section[data-testid="stSidebar"] > div:first-child {{
         margin: 1rem 0 1rem 1rem; border-radius: 18px;
