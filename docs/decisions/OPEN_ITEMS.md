@@ -12,3 +12,16 @@ originally raised.
 - [ ] Red-flag embedding model has never been spot-checked against live, real NewsAPI data end-to-end - only the 17-sentence hand-labeled validation set has been tested (this now also applies to the combined signal_agreement cross-check added in ADR 0009, which the same 17-sentence set could not exercise meaningfully - see ADR 0009's Validation section) - raised in `docs/decisions/0008-contrastive-redflag-detection.md`, targeted: unscheduled - worth doing before the Week 9 full-system evaluation, since it's cheap to run
 - [ ] Red-flag detection threshold (currently 0.5) was inherited from the original keyword-placeholder's contract and never re-tuned against the embedding model's own real score distribution the way the Week 3 relevance threshold was (0.35 -> 0.28 -> 0.5, each backed by observed score bands) - raised in `docs/decisions/0008-contrastive-redflag-detection.md`, targeted: unscheduled
 - [ ] LOTO hard-negative accuracy is not uniform across folds (t6_adanigreen_renewables, t7_itc_fmcg, t8_dlf_realestate meaningfully weaker than t1-t5) - raised in `docs/decisions/0011-week9-evaluation-vader-clustering-loto-breakdown.md`, root cause not yet investigated, targeted: unscheduled
+
+## Deferred to Sep 20 (Final Deadline)
+Items intentionally not being closed before the Sep 10 checkpoint — pushed
+to the final submission window instead.
+
+- [ ] NSE historical backtest (1990-2021) for thesis-flip detection -
+  ROADMAP.md Week 9 item, not started. Targeted: Sep 20.
+- [ ] UI scope gap: 6 of 9 sidebar pages (Portfolio, Risk, Markets,
+  Early Warning, Invest, Reports) remain placeholder/"Not built yet"
+  screens in app.py - only Dashboard, Thesis, and Settings are built.
+  This is a real, named scope deferral, not an oversight - Week 8's
+  ROADMAP.md scope only guaranteed the 3 core views; the rest were
+  nice-to-have nav items in the design system. Targeted: Sep 20.
