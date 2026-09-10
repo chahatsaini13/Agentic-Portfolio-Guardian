@@ -123,6 +123,9 @@ ADR (Architecture Decision Record) — see `docs/decisions/template.md` for
 the format. Read these before making changes; they capture *why*, not just
 *what*.
 
+Real-run validation notes (spot-checks, failure-mode testing) are recorded
+separately in `docs/validation/`.
+
 ## Project structure
 ```
 src/agents/            individual agent implementations
