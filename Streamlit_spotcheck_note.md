@@ -1,4 +1,4 @@
-# Day 3 Spot-Check Note — Streamlit App Validation
+# Spot-Check Note — Streamlit App Validation
 
 **Date:** 2026-09-06/07
 **Validated by:** Navneet
