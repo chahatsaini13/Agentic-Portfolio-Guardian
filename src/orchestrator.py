@@ -141,6 +141,7 @@ def merge_node(state: PortfolioGuardianState) -> PortfolioGuardianState:
             "thesis_reasoning": thesis_result.get("reasoning"),
             "market_sentiment": market_result.get("overall_sentiment"),
             "market_summary": market_result.get("summary"),
+            "news_items": market_result.get("news_items") or [],
             "redflag_alerts": early_warning_alerts,
         })
 
