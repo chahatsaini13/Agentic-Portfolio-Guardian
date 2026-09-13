@@ -23,6 +23,9 @@ from views.placeholder import page_placeholder
 from views.portfolio import page_portfolio
 from views.risk import page_risk
 from views.rebalancing import page_rebalancing
+from views.markets import page_markets
+from views.early_warning import page_early_warning
+from views.reports import page_reports
 
 st.set_page_config(page_title="Portfolio Intelligence", page_icon="🍷", layout="wide")
 
@@ -227,5 +230,11 @@ elif page == "Risk":
     page_risk()
 elif page == "Rebalancing":
     page_rebalancing()
+elif page == "Markets":
+    page_markets()
+elif page == "Early Warning":
+    page_early_warning()
+elif page == "Reports":
+    page_reports()
 else:
     page_placeholder(page)
