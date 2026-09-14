@@ -30,7 +30,6 @@ from views.reports import page_reports
 st.set_page_config(page_title="Portfolio Intelligence", page_icon="🍷", layout="wide")
 
 NAV_ITEMS = ["Dashboard", "Portfolio", "Risk", "Thesis", "Markets", "Early Warning", "Rebalancing", "Reports", "Settings"]
-NAV_ITEMS = ["Dashboard", "Portfolio", "Risk", "Thesis", "Markets", "Early Warning", "Rebalancing", "Reports", "Settings"]
 st.session_state.setdefault("page", "Dashboard")
 st.session_state.setdefault("final_state", None)
 st.session_state.setdefault("last_run_ts", None)

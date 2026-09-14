@@ -127,7 +127,7 @@ Get recent news for each holding → Embed news using contrastively trained enco
 |---|---|
 | Define LangGraph state graph connecting all 4 agents | Member 1 |
 | Merge outputs into one coherent per-stock + per-portfolio insight | Member 2 |
-| Handle agent failures/timeouts gracefully | Both |
+| Handle agent failures/timeouts gracefully Documented in ADR 0010. | Both | 
 **Pipeline:**
 ```
 Define shared state structure for LangGraph → Add each of the 4 agents as a graph node
@@ -135,7 +135,7 @@ Define shared state structure for LangGraph → Add each of the 4 agents as a gr
 → Merge all agent outputs into one combined insight → Handle failures/timeouts gracefully
 ```
 *Future enhancement (post-MVP): Add a self-reflection step to agent outputs (Reflexion-style): after Ollama returns a verdict, a second pass checks whether the reasoning actually cites specific data/news points vs being generic, and re-prompts if weak. Natural fit once Orchestrator exists.*
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 8 — Dashboard / UI Layer
 | Task | Owner |
@@ -143,13 +143,20 @@ Define shared state structure for LangGraph → Add each of the 4 agents as a gr
 | Decide + set up UI framework (Streamlit) | Member 2 |
 | Design views: thesis status, portfolio health, alerts feed | Member 1 |
 | Wire Orchestrator's JSON output into the UI | Both |
+
+Scope grew beyond the original 3-view plan into 9 pages: Dashboard,
+Portfolio, Risk, Thesis, Markets, Early Warning, Rebalancing, Reports,
+Settings — a single combined Dashboard overview plus separate detail
+pages per agent/topic, rather than one flat 3-section view.
 **Pipeline:**
 ```
-Load Orchestrator's combined JSON output → Display thesis status per stock
-→ Display portfolio health/risk view → Display red-flag alerts feed
-→ Assemble everything into one dashboard
+Load Orchestrator's combined JSON output (final_state["final_output"])
+→ Render single combined Dashboard (summary across all agents)
+→ Route to separate detail pages per topic: Portfolio, Risk, Thesis, Markets, Early Warning, Rebalancing, Reports
+→ Settings page for configuration
+→ Shared glass-panel UI pattern across all pages
 ```
-**Status: ⬜ Not Started**
+**Status: ✅ Completed**
 
 ## Week 9 — Evaluation (incl. Contrastive Embedding Quality)
 | Task | Owner |
@@ -172,9 +179,14 @@ Load evaluation dataset (Financial PhraseBank / historical NSE data)
 | Task | Owner |
 |---|---|
 | Clean up code, add docstrings/comments | Both |
-| Finalize README with screenshots/demo GIF | Member 1 |
+| ✅ Finalize README with screenshots/demo GIF | Member 1 |
 | Record demo video (if required for viva) | Member 2 |
 | Final push + tag release (v1.0) | Both |
-**Status: ⬜ Not Started**
+
+Additional polish already completed ahead of this week's original scope:
+- `.env.example` fix
+- Ollama timeout fix (`timeout=300` across all four agent files)
+- Failure-mode validation doc (`docs/validation/failure_mode_testing.md`)
+**Status: 🔄 In Progress**
 
 ---
