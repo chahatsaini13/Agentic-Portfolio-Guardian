@@ -161,9 +161,9 @@ Load Orchestrator's combined JSON output (final_state["final_output"])
 ## Week 9 — Evaluation (incl. Contrastive Embedding Quality)
 | Task | Owner |
 |---|---|
-| Validate sentiment agent accuracy against Financial PhraseBank | Member 2 |
-| Measure contrastive embedding separation quality (e.g. cluster purity/silhouette score) vs generic embedding baseline | Member 2 |
-| Backtest thesis-flip detection on historical NSE data (1990–2021) | Member 1 |
+| ✅ Validate sentiment agent accuracy against Financial PhraseBank — see ADR 0011 | Member 2 |
+| ✅ Measure contrastive embedding separation quality (e.g. cluster purity/silhouette score) vs generic embedding baseline — see ADR 0011 | Member 2 |
+| Backtest thesis-flip detection on historical NSE data (1990–2021) — 🔄 In Progress: fundamentals-only pilot complete (ADR 0012, 5-10 stocks); full 1,700-stock validation still pending | Member 1 |
 | Document results in `docs/decisions/` | Both |
 | Full end-to-end demo for supervisor review | Both |
 **Pipeline:**
@@ -190,5 +190,45 @@ Additional polish already completed ahead of this week's original scope:
 - Ollama timeout fix (`timeout=300` across all four agent files)
 - Failure-mode validation doc (`docs/validation/failure_mode_testing.md`)
 **Status: 🔄 In Progress**
+
+---
+
+## BTP Part 2 — Extension: Entity-Level Sentiment Generalization
+
+**Note:** This is a separate extension track, distinct from the core-scope
+Week 9 backtest task above — kept in its own section specifically to avoid
+the two being confused with each other again (this mix-up already happened
+once in an earlier supervisor discussion).
+
+**Goal:** Extend the existing contrastive sentiment model
+(`sentiment_tagger.py`, ADR 0006) from sentence-level (trained on Financial
+PhraseBank) to entity-level sentiment. This addresses a real gap in the
+current model: a single headline mentioning multiple companies with
+conflicting sentiment (e.g. "X gains as rival Y struggles") cannot be
+correctly tagged by a sentence-level model, since it can only assign one
+sentiment label to the whole sentence.
+
+**Datasets:**
+- **SEntFiN 1.0** — 10,753 entity-tagged financial headlines. Used as
+  training data for building entity-level contrastive triplets (same
+  anchor/positive/negative shape as `build_sentiment_pairs.py`, adapted to
+  anchor on an (entity, headline) pair instead of the headline alone).
+- **FiQA 2018** — 1,173 headlines. Held out entirely as a cross-dataset
+  generalization test (never touched during training), so the resulting
+  accuracy number reflects generalization to a genuinely different source,
+  not just a held-out split of the same dataset.
+
+**Method:** Same triplet-construction + `MultipleNegativesRankingLoss`
+fine-tuning approach used for the existing sentiment model
+(`build_sentiment_pairs.py` / ADR 0006), adapted so anchors are
+entity-level (a specific company mention within a headline) rather than
+whole-sentence.
+
+**Key papers/references:**
+- FinEntity (arXiv:2310.12406)
+- FinBERT (arXiv:1908.10063)
+- SEntFiN dataset paper
+
+**Status: ⬜ Not Started** — planning stage only right now.
 
 ---
