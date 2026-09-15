@@ -1,0 +1,131 @@
+{
+  "run_at": "2026-09-15T12:43:54",
+  "lookback_days": 252,
+  "forward_days": 126,
+  "results": [
+    {
+      "ticker": "TCS",
+      "cutoff_date": "2020-04-08",
+      "features": {
+        "cutoff_date": "2020-04-08",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.146,
+        "volatility_annualized": 0.3247,
+        "max_drawdown": -0.2857,
+        "value_at_risk_95": -0.0298,
+        "conditional_var_95": -0.0501,
+        "downside_deviation": 0.242
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "TCS's recent fundamental strength is still evident in its trailing cumulative return of -0.146, which is not overly negative, and its annualized volatility of 0.3247, which suggests some degree of stability. The stock's max drawdown of -0.2857 is also within reasonable limits. While the value at risk and conditional value at risk are relatively high, the downside deviation is relatively low, indicating some resilience in the stock's price movement.",
+      "actual_forward_return": 0.6501,
+      "actual_outcome": "GROWTH",
+      "direction_score": "correct"
+    },
+    {
+      "ticker": "TCS",
+      "cutoff_date": "2008-04-15",
+      "features": {
+        "cutoff_date": "2008-04-15",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.2313,
+        "volatility_annualized": 0.3722,
+        "max_drawdown": -0.407,
+        "value_at_risk_95": -0.0325,
+        "conditional_var_95": -0.0485,
+        "downside_deviation": 0.2563
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "The thesis holds because the trailing cumulative return is still negative, indicating a recent period of underperformance. However, the volatility and value-at-risk metrics suggest that the stock has not become excessively risky or volatile. Additionally, the drawdown profile shows a relatively contained maximum drawdown, which supports the thesis of continued fundamental strength.",
+      "actual_forward_return": -0.5465,
+      "actual_outcome": "DECLINE",
+      "direction_score": "incorrect"
+    },
+    {
+      "ticker": "INFY",
+      "cutoff_date": "1998-07-23",
+      "error": "Not enough trailing history before 1998-07-23 (85 days, wanted ~252)."
+    },
+    {
+      "ticker": "INFY",
+      "cutoff_date": "2001-03-28",
+      "features": {
+        "cutoff_date": "2001-03-28",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.5381,
+        "volatility_annualized": 0.6529,
+        "max_drawdown": -0.6038,
+        "value_at_risk_95": -0.077,
+        "conditional_var_95": -0.0901,
+        "downside_deviation": 0.4683
+      },
+      "llm_verdict": "WEAKENING",
+      "llm_reasoning": "The recent cumulative return is negative (-0.5381), which suggests a downward trend in INFY's fundamentals. Additionally, the max drawdown of -0.6038 and value-at-risk (VaR) of -0.077 indicate that the stock has experienced significant volatility and potential losses. These indicators suggest that the fundamental strength INFY has seen may be weakening, making the thesis less compelling.",
+      "actual_forward_return": -0.4991,
+      "actual_outcome": "DECLINE",
+      "direction_score": "ambiguous_not_scored"
+    },
+    {
+      "ticker": "RELIANCE",
+      "cutoff_date": "2008-04-23",
+      "features": {
+        "cutoff_date": "2008-04-23",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.6521,
+        "volatility_annualized": 0.4215,
+        "max_drawdown": -0.3376,
+        "value_at_risk_95": -0.0441,
+        "conditional_var_95": -0.0581,
+        "downside_deviation": 0.2828
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "The strong cumulative return of 65.21% over the 252-day window indicates a solid uptrend. Volatility remains relatively contained at 42.15%, which may indicate a healthy balance between risk and return. The max drawdown of -33.76% is not excessively high, and the 95% Value at Risk (VaR) and Conditional VaR (CVaR) are within reasonable limits, further supporting the thesis that RELIANCE's recent fundamental strength will continue.",
+      "actual_forward_return": -0.6073,
+      "actual_outcome": "DECLINE",
+      "direction_score": "incorrect"
+    },
+    {
+      "ticker": "HDFCBANK",
+      "cutoff_date": "2019-03-13",
+      "error": "Forward window after 2019-03-13 contains a likely stock split/bonus artifact. Pick a different cutoff or ticker."
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "cutoff_date": "1999-08-03",
+      "features": {
+        "cutoff_date": "1999-08-03",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.5996,
+        "volatility_annualized": 0.5482,
+        "max_drawdown": -0.3231,
+        "value_at_risk_95": -0.0515,
+        "conditional_var_95": -0.0651,
+        "downside_deviation": 0.3344
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "The stock's recent fundamental strength is evidenced by a 59.96% trailing cumulative return, a relatively low volatility of 54.82%, and a moderate maximum drawdown of -32.31%. These metrics suggest a stable and performing investment, supporting the thesis that the stock's fundamentals will continue to support its value.",
+      "actual_forward_return": 3.4174,
+      "actual_outcome": "GROWTH",
+      "direction_score": "correct"
+    },
+    {
+      "ticker": "WIPRO",
+      "cutoff_date": "2009-03-03",
+      "features": {
+        "cutoff_date": "2009-03-03",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.5151,
+        "volatility_annualized": 0.6216,
+        "max_drawdown": -0.6222,
+        "value_at_risk_95": -0.0636,
+        "conditional_var_95": -0.0862,
+        "downside_deviation": 0.46
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "The recent fundamental strength of WIPRO is supported by its negative trailing cumulative return, which indicates that the stock has still been performing relatively well despite the market downturn. The volatility, max drawdown, and VaR/ CVaR measures suggest a moderate level of risk, which is in line with the stock's past performance. The downside deviation is also moderate, indicating that the stock has experienced some significant downward movements, but has also shown some recovery. Overall, these fundamentals suggest that WIPRO's recent strength is likely to continue.",
+      "actual_forward_return": 1.7705,
+      "actual_outcome": "GROWTH",
+      "direction_score": "correct"
+    }
+  ]
+}

@@ -173,7 +173,9 @@ Load evaluation dataset (Financial PhraseBank / historical NSE data)
 → Compare contrastive-embedding results vs generic-embedding baseline
 → Log results and findings as an ADR
 ```
-**Status: ⬜ Not Started**
+**Status: 🔄 In Progress** — fundamentals-only backtest pilot completed
+(see ADR 0012); full 1,700-stock validation and sentiment/contrastive
+embedding quality evaluation still pending.
 
 ## Week 10 — Polish & Submission (buffer week)
 | Task | Owner |
