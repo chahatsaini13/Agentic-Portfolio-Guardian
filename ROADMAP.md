@@ -126,9 +126,8 @@ Get recent news for each holding → Embed news using contrastively trained enco
 | Task | Owner |
 |---|---|
 | Define LangGraph state graph connecting all 4 agents | Member 1 |
-| Merge outputs into one coherent per-stock + per-portfolio insight | Member 2 |
-| Handle agent failures/timeouts gracefully Documented in ADR 0010. | Both | 
-**Pipeline:**
+| Merge outputs into one coherent per-stock + per-portfolio insight | Member 1 |
+| Handle agent failures/timeouts gracefully | Member 1 |
 ```
 Define shared state structure for LangGraph → Add each of the 4 agents as a graph node
 → Connect nodes in the right order/logic → Run the full graph
@@ -140,7 +139,7 @@ Define shared state structure for LangGraph → Add each of the 4 agents as a gr
 ## Week 8 — Dashboard / UI Layer
 | Task | Owner |
 |---|---|
-| Decide + set up UI framework (Streamlit) | Member 2 |
+| Decide + set up UI framework (Streamlit) | Member 1 |
 | Design views: thesis status, portfolio health, alerts feed | Member 1 |
 | Wire Orchestrator's JSON output into the UI | Both |
 
