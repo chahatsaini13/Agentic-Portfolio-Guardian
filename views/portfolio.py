@@ -1,6 +1,13 @@
 import streamlit as st
 
-from views.common import C, DEFAULT_PORTFOLIO_PATH, allocation_bars_html, load_portfolio, svg_donut
+from views.common import (
+    C,
+    DEFAULT_PORTFOLIO_PATH,
+    allocation_bars_html,
+    donut_legend_html,
+    load_portfolio,
+    svg_donut,
+)
 
 
 def page_portfolio():
@@ -24,47 +31,51 @@ def page_portfolio():
 
     st.markdown('<div class="section-kicker">Portfolio Composition</div>', unsafe_allow_html=True)
 
-    row1 = st.columns([1, 1, 1])
+    # Row 1: Sector Allocation (wheel left, legend right) | Industry
+    row1 = st.columns([1.3, 1])
     with row1[0]:
         if sector_weights:
             body = (
-                f'<div style="display:flex; justify-content:center; margin:0.2rem 0 0.4rem;">{svg_donut(sector_weights)}</div>'
-                f'<div style="font-size:0.78rem; color:{C["text_muted"]}; text-align:center;">By sector</div>'
+                f'<div style="display:flex; align-items:center; gap:1.1rem; '
+                f'min-height:170px; margin:0.3rem 0 0.2rem;">'
+                f'<div style="flex-shrink:0;">{svg_donut(sector_weights)}</div>'
+                f'<div style="flex:1; min-width:0;">{donut_legend_html(sector_weights)}</div>'
+                f'</div>'
             )
         else:
             body = f'<span style="color:{C["text_muted"]}; font-size:0.82rem;">No sector data</span>'
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass" style="padding:1.1rem 1.3rem; min-height:230px;">'
             f'<div class="section-kicker">Sector Allocation</div>{body}</div>',
             unsafe_allow_html=True,
         )
 
     with row1[1]:
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
-            f'<div class="section-kicker">Asset Class</div>{allocation_bars_html(asset_class_allocation)}</div>',
-            unsafe_allow_html=True,
-        )
-
-    with row1[2]:
-        st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
-            f'<div class="section-kicker">Market Cap</div>{allocation_bars_html(market_cap_allocation)}</div>',
+            f'<div class="glass" style="padding:1.1rem 1.3rem; min-height:230px;">'
+            f'<div class="section-kicker">Industry</div>{allocation_bars_html(industry_allocation)}</div>',
             unsafe_allow_html=True,
         )
 
     st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
 
-    row2 = st.columns([1, 1])
+    # Row 2: Asset Class | Market Cap | Thematic Overlap
+    row2 = st.columns([1, 1, 1])
     with row2[0]:
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
-            f'<div class="section-kicker">Industry</div>{allocation_bars_html(industry_allocation)}</div>',
+            f'<div class="glass grow-card" style="padding:1.1rem 1.3rem;">'
+            f'<div class="section-kicker">Asset Class</div>{allocation_bars_html(asset_class_allocation)}</div>',
             unsafe_allow_html=True,
         )
     with row2[1]:
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass grow-card" style="padding:1.1rem 1.3rem;">'
+            f'<div class="section-kicker">Market Cap</div>{allocation_bars_html(market_cap_allocation)}</div>',
+            unsafe_allow_html=True,
+        )
+    with row2[2]:
+        st.markdown(
+            f'<div class="glass grow-card" style="padding:1.1rem 1.3rem;">'
             f'<div class="section-kicker">Thematic Overlap</div>{allocation_bars_html(thematic_overlap)}</div>',
             unsafe_allow_html=True,
         )

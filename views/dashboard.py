@@ -1,11 +1,60 @@
 from collections import Counter
 
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
-from views.common import C, SENTIMENT_COLOR, badge, svg_donut
+from views.common import C, SENTIMENT_COLOR, badge, svg_donut, DEFAULT_PORTFOLIO_PATH, donut_legend_html, generate_gold_shades
+from src.agents.portfolio_health_agent import load_portfolio
+from src.price_feed import fetch_live_prices
+
+def render_price_strip(refresh_seconds: int = 7):
+    """Live-ish price ticker - polls yfinance only (no Ollama/NewsAPI),
+    refreshed every `refresh_seconds` via st_autorefresh. Independent of
+    final_state/the scheduled pipeline - shows even before any analysis
+    has ever run, since it only needs the portfolio's ticker list."""
+    st_autorefresh(interval=refresh_seconds * 1000, key="price_autorefresh")
+
+    portfolio_path = st.session_state.get("portfolio_path", DEFAULT_PORTFOLIO_PATH)
+    try:
+        holdings = load_portfolio(portfolio_path)
+    except Exception:
+        return  # no portfolio file yet - just skip the strip silently
+
+    tickers = [h["ticker"] for h in holdings]
+    prices = fetch_live_prices(tickers)
+
+    cards = ""
+    for ticker in tickers:
+        p = prices.get(ticker, {})
+        price = p.get("price")
+        change = p.get("change_pct")
+        if price is None:
+            price_str, change_str, color = "N/A", "", C["text_muted"]
+        else:
+            price_str = f"₹{price:,.2f}"
+            color = C["green"] if (change or 0) >= 0 else C["red_light"]
+            arrow = "▲" if (change or 0) >= 0 else "▼"
+            change_str = f"{arrow} {abs(change):.2f}%" if change is not None else ""
+        cards += (
+            f'<div style="min-width:120px;">'
+            f'<div style="font-size:0.7rem; color:{C["text_muted"]};">{ticker}</div>'
+            f'<div style="font-size:0.95rem; font-weight:600;">{price_str}</div>'
+            f'<div style="font-size:0.72rem; color:{color};">{change_str}</div>'
+            f'</div>'
+        )
+
+    st.markdown(
+        f'<div class="glass" style="padding:0.6rem 1.2rem; margin:-2.4rem 0 0.9rem 0; '
+        f'display:flex; gap:1.6rem; overflow-x:auto;">{cards}</div>',
+        unsafe_allow_html=True,
+    )
 
 
 def page_dashboard():
+    st.markdown('<div class="section-kicker">Dashboard</div>', unsafe_allow_html=True)
+    
+    render_price_strip()
+
     final_state = st.session_state.get("final_state")
     if not final_state:
         st.markdown(
@@ -70,11 +119,11 @@ def page_dashboard():
             unsafe_allow_html=True,
         )
 
-    hero_cols = st.columns([1, 1.8])
-    with hero_cols[0]:
+    top_cols = st.columns([1.3, 1])
+    with top_cols[0]:
         pct = max(0, min(100, health_score or 0))
         st.markdown(
-            f'<div class="glass" style="padding:1.2rem 1.4rem; height:100%;">'
+            f'<div class="glass" style="padding:1.2rem 1.4rem;">'
             f'<div class="section-kicker">Portfolio Health</div>'
             f'<div style="font-size:2.1rem; font-weight:700; color:{C["gold_light"]};">{health_score if health_score is not None else "N/A"}</div>'
             f'<div class="progress-track"><div class="progress-fill" style="width:{pct}%; background:linear-gradient(90deg,{C["gold_dark"]},{C["gold_light"]});"></div></div>'
@@ -83,19 +132,18 @@ def page_dashboard():
             unsafe_allow_html=True,
         )
 
-    with hero_cols[1]:
+        st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
+
         st.markdown(
-            f'<div class="glass" style="padding:1.2rem 1.4rem; height:100%;">'
+            f'<div class="glass" style="padding:1.2rem 1.4rem;">'
             f'<div class="section-kicker">AI Synthesis</div>'
             f'<p style="font-size:0.86rem; line-height:1.55; color:{C["text"]}; margin:0;">{synthesis}</p>'
             f'</div>',
             unsafe_allow_html=True,
         )
 
-    st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
+        st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
 
-    row2 = st.columns([1.3, 1, 1])
-    with row2[0]:
         metrics = [
             ("CAGR", perf.get("cagr")), ("Sharpe", perf.get("sharpe_ratio")),
             ("Volatility", risk.get("volatility_annualized")), ("Max DD", risk.get("max_drawdown")),
@@ -113,29 +161,57 @@ def page_dashboard():
             f'Run with price history enabled to populate these.</p>'
         ) if not perf and not risk else ''
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
             f'<div class="section-kicker">Performance &amp; Risk</div>{metrics_html}{empty_note}</div>',
             unsafe_allow_html=True,
         )
 
-    with row2[1]:
+        st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
+
+        n_holds = status_counts.get("HOLDS", 0)
+        summary_chips = (
+            f'{badge(f"{n_broken} Broken", "broken")} &nbsp; '
+            f'{badge(f"{n_weak} Weakening", "weakening")} &nbsp; '
+            f'{badge(f"{n_holds} Holds", "holds")}'
+        )
+        badges_row = (
+            f'<div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.6rem; flex-wrap:wrap;">'
+            f'<div>{summary_chips}</div>'
+            f'<a href="?page=Thesis" target="_self" style="text-decoration:none; font-size:0.78rem; font-weight:600; '
+            f'color:{C["gold_light"]}; background:rgba(201,165,103,0.12); border:1px solid rgba(201,165,103,0.3); '
+            f'border-radius:999px; padding:0.35rem 0.9rem; white-space:nowrap;">View full monitor →</a>'
+            f'</div>'
+        )
+        st.markdown(
+            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
+            f'<div class="section-kicker">Thesis Monitor</div>'
+            f'<div style="margin:0.4rem 0 0.2rem;">{badges_row}</div>'
+            f'<p style="font-size:0.8rem; color:{C["text_muted"]}; margin:0.6rem 0 0;">'
+            f'{len(per_holding)} holdings tracked — full reasoning, sentiment, and red-flag detail on the Thesis page.</p>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+    with top_cols[1]:
         if sector_weights:
             body = (
-                f'<div style="display:flex; justify-content:center; margin:0.2rem 0 0.4rem;">{svg_donut(sector_weights)}</div>'
-                f'<div style="font-size:0.78rem; color:{C["text_muted"]}; text-align:center;">'
-                f'Largest: {largest_sector.get("sector","N/A")} · {(largest_sector.get("weight") or 0)*100:.0f}%</div>'
+                f'<div style="display:flex; align-items:center; gap:1.4rem; margin-top:0.5rem;">'
+                f'<div style="flex-shrink:0;">{svg_donut(sector_weights)}</div>'
+                f'<div style="flex:1;">{donut_legend_html(sector_weights)}</div>'
+                f'</div>'
             )
         else:
             body = f'<span style="color:{C["text_muted"]}; font-size:0.82rem;">No sector data</span>'
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
             f'<div class="section-kicker">Allocation</div>{body}</div>',
             unsafe_allow_html=True,
         )
 
-    with row2[2]:
+        st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
+
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
             f'<div class="section-kicker">Diversification</div>'
             f'<div style="font-size:1.7rem; font-weight:700; color:{C["gold_light"]};">{div_score if div_score is not None else "N/A"}</div>'
             f'<div style="font-size:0.78rem; color:{C["text_muted"]}; margin-top:0.4rem;">Largest holding: {largest_holding.get("ticker","N/A")} · {(largest_holding.get("weight") or 0)*100:.0f}%</div>'
@@ -143,17 +219,15 @@ def page_dashboard():
             unsafe_allow_html=True,
         )
 
-    st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
+        st.markdown('<div style="height:0.9rem;"></div>', unsafe_allow_html=True)
 
-    n_holds = status_counts.get("HOLDS", 0)
-    row3 = st.columns([1, 1.6])
-    with row3[0]:
         total_sent = sum(sentiment_counts.values()) or 1
+        pulse_palette = generate_gold_shades(3)
         bars_html = ""
-        for label in ["positive", "neutral", "negative"]:
+        for i, label in enumerate(["positive", "neutral", "negative"]):
             n = sentiment_counts.get(label, 0)
             pct = (n / total_sent) * 100
-            color = SENTIMENT_COLOR[label]
+            color = pulse_palette[i]
             bars_html += (
                 f'<div style="margin-bottom:0.5rem;">'
                 f'<div style="display:flex; justify-content:space-between; font-size:0.78rem; color:{C["text_muted"]};">'
@@ -162,26 +236,8 @@ def page_dashboard():
                 f'</div>'
             )
         st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem; height:100%;">'
+            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
             f'<div class="section-kicker">Market Pulse</div>{bars_html}</div>',
             unsafe_allow_html=True,
         )
-
-    with row3[1]:
-        summary_chips = (
-            f'{badge(f"{n_broken} Broken", "broken")} &nbsp; '
-            f'{badge(f"{n_weak} Weakening", "weakening")} &nbsp; '
-            f'{badge(f"{n_holds} Holds", "holds")}'
-        )
-        st.markdown(
-            f'<div class="glass" style="padding:1.1rem 1.3rem;">'
-            f'<div class="section-kicker">Thesis Monitor</div>'
-            f'<div style="margin:0.4rem 0 0.2rem;">{summary_chips}</div>'
-            f'<p style="font-size:0.8rem; color:{C["text_muted"]}; margin:0.6rem 0 0;">'
-            f'{len(per_holding)} holdings tracked — full reasoning, sentiment, and red-flag detail on the Thesis page.</p>'
-            f'</div>',
-            unsafe_allow_html=True,
-        )
-        if st.button("View full thesis monitor →", use_container_width=True, key="goto_thesis"):
-            st.session_state["page"] = "Thesis"
-            st.rerun()
+    st.markdown('<div style="height:1.5rem;"></div>', unsafe_allow_html=True)

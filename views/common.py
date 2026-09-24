@@ -13,6 +13,8 @@ import streamlit as st
 
 from src.agents.portfolio_health_agent import load_portfolio
 from src import orchestrator
+from src.scheduler import start_scheduler_once
+from src.cache_store import load_latest_state
 
 THESES_PATH = "data/theses.json"
 DEFAULT_PORTFOLIO_PATH = "data/sample_portfolio.csv"
@@ -86,6 +88,34 @@ def custom_spinner_html() -> str:
     </div>'''
 
 
+def start_background_scheduler_once():
+    """Starts the scheduler once per Streamlit session (cheap session_state
+    guard here). src/scheduler.py's own module-level singleton is the real
+    guard against duplicate schedulers across multiple sessions in the same
+    process - this just avoids re-checking on every rerun."""
+    if not st.session_state.get("scheduler_started"):
+        start_scheduler_once()
+        st.session_state["scheduler_started"] = True
+
+
+def init_state_from_cache():
+    """Called once at app startup (from app.py, right after the
+    st.session_state.setdefault() calls) so the dashboard shows the last
+    scheduled run immediately instead of being blank until someone clicks
+    'Run Full Analysis'. Never overwrites a final_state that's already
+    populated in this session (e.g. from a manual run earlier)."""
+    if st.session_state.get("final_state") is not None:
+        return
+    cached = load_latest_state()
+    if cached is None:
+        return
+    st.session_state["final_state"] = {
+        "final_output": cached["final_output"],
+        "errors": cached["errors"],
+    }
+    st.session_state["last_run_ts"] = cached["last_updated"] + " (cached)"
+
+
 def run_analysis():
     theses_now = st.session_state.get("theses_edit") or {}
     if theses_now:
@@ -102,6 +132,23 @@ def run_analysis():
     st.session_state["final_state"] = final_state
     st.session_state["last_run_ts"] = datetime.now().strftime("%b %d, %Y · %H:%M")
 
+def generate_gold_shades(n: int) -> list:
+    """Self-assigning luxe palette: n shades of one warm gold/amber hue,
+    interpolated bright-to-deep-bronze, so any category count (however
+    many holdings/sectors/industries exist) gets a cohesive but visibly
+    distinct set of colors - no manual palette list to maintain."""
+    if n <= 0:
+        return []
+    light = (240, 200, 117)   # bright glowing amber
+    dark = (74, 51, 10)       # deep bronze
+    shades = []
+    for i in range(n):
+        t = i / max(1, n - 1)  # 0 -> 1 across the n stops
+        r = round(light[0] + (dark[0] - light[0]) * t)
+        g = round(light[1] + (dark[1] - light[1]) * t)
+        b = round(light[2] + (dark[2] - light[2]) * t)
+        shades.append(f"#{r:02X}{g:02X}{b:02X}")
+    return shades
 
 def svg_donut(sector_weights: dict, size: int = 130, stroke: int = 16) -> str:
     """Hand-rolled ring chart as a single inline SVG string, so it can be
@@ -111,7 +158,7 @@ def svg_donut(sector_weights: dict, size: int = 130, stroke: int = 16) -> str:
     labels = list(sector_weights.keys())
     values = list(sector_weights.values())
     total = sum(values) or 1
-    palette = [C["red_mid"], C["gold"], C["green"], C["text_muted"], C["gold_alt"], C["red_deep"]]
+    palette = generate_gold_shades(len(values))
     cx = cy = size / 2
     r = size / 2 - stroke / 2 - 2
     circumference = 2 * math.pi * r
@@ -132,6 +179,27 @@ def svg_donut(sector_weights: dict, size: int = 130, stroke: int = 16) -> str:
     return f'<svg width="{size}" height="{size}" viewBox="0 0 {size} {size}">{arcs}</svg>'
 
 
+def donut_legend_html(sector_weights: dict) -> str:
+    """Color-coded legend for svg_donut() - same palette/order so colors
+    match exactly."""
+    if not sector_weights:
+        return ""
+    palette = generate_gold_shades(len(sector_weights))
+    items = ""
+    for i, (label, weight) in enumerate(sector_weights.items()):
+        color = palette[i % len(palette)]
+        pct = (weight or 0) * 100
+        items += (
+            f'<div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.3rem;">'
+            f'<span style="width:9px; height:9px; border-radius:50%; background:{color}; '
+            f'box-shadow:0 0 4px {color}; flex-shrink:0;"></span>'
+            f'<span style="font-size:0.76rem; color:{C["text_muted"]};">{label}</span>'
+            f'<span style="font-size:0.76rem; color:{C["text_muted"]}; margin-left:auto;">{pct:.0f}%</span>'
+            f'</div>'
+        )
+    return f'<div style="margin-top:0.6rem;">{items}</div>'
+
+
 def allocation_bars_html(allocation: dict) -> str:
     """Horizontal progress-bar breakdown for a {label: weight_fraction}
     dict - same progress-track/progress-fill pattern as the Market Pulse
@@ -139,16 +207,18 @@ def allocation_bars_html(allocation: dict) -> str:
     st.markdown itself), same contract as svg_donut()."""
     if not allocation:
         return f'<span style="color:{C["text_muted"]}; font-size:0.82rem;">No data</span>'
-    palette = [C["gold"], C["red_mid"], C["green"], C["text_muted"], C["gold_alt"], C["red_deep"]]
+    sorted_items = sorted(allocation.items(), key=lambda kv: kv[1], reverse=True)
+    palette = generate_gold_shades(len(sorted_items))
     bars_html = ""
-    for i, (label, weight) in enumerate(sorted(allocation.items(), key=lambda kv: kv[1], reverse=True)):
+    for i, (label, weight) in enumerate(sorted_items):
         pct = (weight or 0) * 100
         color = palette[i % len(palette)]
         bars_html += (
             f'<div style="margin-bottom:0.5rem;">'
             f'<div style="display:flex; justify-content:space-between; font-size:0.78rem; color:{C["text_muted"]};">'
             f'<span>{label}</span><span>{pct:.0f}%</span></div>'
-            f'<div class="progress-track"><div class="progress-fill" style="width:{pct}%; background:{color};"></div></div>'
+            f'<div class="progress-track"><div class="progress-fill" style="width:{pct}%; background:{color}; '
+            f'box-shadow:0 0 6px {color};"></div></div>'
             f'</div>'
         )
     return bars_html
