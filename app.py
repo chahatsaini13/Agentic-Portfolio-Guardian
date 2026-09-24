@@ -34,6 +34,13 @@ st.session_state.setdefault("page", "Dashboard")
 st.session_state.setdefault("final_state", None)
 st.session_state.setdefault("last_run_ts", None)
 
+if "page" in st.query_params:
+    st.session_state["page"] = st.query_params["page"]
+    st.query_params.clear()
+    
+from views.common import start_background_scheduler_once, init_state_from_cache
+start_background_scheduler_once()
+init_state_from_cache()
 
 def inject_css(no_scroll: bool):
     scroll_lock = """
@@ -163,9 +170,33 @@ def inject_css(no_scroll: bool):
     .scroll-box {{ overflow-y: auto; }}
     .scroll-box::-webkit-scrollbar {{ width: 6px; }}
     .scroll-box::-webkit-scrollbar-thumb {{ background: rgba(201,165,103,0.28); border-radius: 999px; }}
+
+     [data-testid="stExpander"] {{
+        background: {C['glass_bg']}; border: 1px solid {C['glass_border']}; border-radius: 14px;
+        backdrop-filter: blur(20px);
+    }}
+
+    .scroll-box {{ overflow-y: auto; }}
+    .scroll-box::-webkit-scrollbar {{ width: 6px; }}
+    .scroll-box::-webkit-scrollbar-thumb {{ background: rgba(201,165,103,0.28); border-radius: 999px; }}
+
+        [data-testid="stHorizontalBlock"] {{
+        align-items: stretch !important;
+    }}
+
+    [data-testid="stHorizontalBlock"] > div[data-testid="column"] {{
+        display: flex !important;
+        flex-direction: column !important;
+    }}
+
+    .grow-card {{
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }}
+
     </style>
     """, unsafe_allow_html=True)
-
 
 def render_sidebar():
     st.sidebar.markdown(

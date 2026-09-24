@@ -10,4 +10,5 @@ scikit-learn
 langgraph
 streamlit
 plotly
-
+apscheduler
+streamlit-autorefresh
