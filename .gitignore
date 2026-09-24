@@ -5,3 +5,6 @@ venv/
 .venv/
 models/
 checkpoints/
+data/nse_historical/
+results/latest_state.json
+results/verdict_history/
