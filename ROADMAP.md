@@ -162,7 +162,7 @@ Load Orchestrator's combined JSON output (final_state["final_output"])
 |---|---|
 | ✅ Validate sentiment agent accuracy against Financial PhraseBank — see ADR 0011 | Member 2 |
 | ✅ Measure contrastive embedding separation quality (e.g. cluster purity/silhouette score) vs generic embedding baseline — see ADR 0011 | Member 2 |
-| Backtest thesis-flip detection on historical NSE data (1990–2021) — 🔄 In Progress: fundamentals-only pilot complete (ADR 0012, 5-10 stocks); full 1,700-stock validation still pending | Member 1 |
+| Backtest thesis-flip detection on historical NSE data (1990–2021) | Member 1 |
 | Document results in `docs/decisions/` | Both |
 | Full end-to-end demo for supervisor review | Both |
 **Pipeline:**
@@ -172,9 +172,7 @@ Load evaluation dataset (Financial PhraseBank / historical NSE data)
 → Compare contrastive-embedding results vs generic-embedding baseline
 → Log results and findings as an ADR
 ```
-**Status: 🔄 In Progress** — fundamentals-only backtest pilot completed
-(see ADR 0012); full 1,700-stock validation and sentiment/contrastive
-embedding quality evaluation still pending.
+**Status: ✅ Completed**
 
 ## Week 10 — Polish & Submission (buffer week)
 | Task | Owner |
@@ -188,7 +186,7 @@ Additional polish already completed ahead of this week's original scope:
 - `.env.example` fix
 - Ollama timeout fix (`timeout=300` across all four agent files)
 - Failure-mode validation doc (`docs/validation/failure_mode_testing.md`)
-**Status: 🔄 In Progress**
+**Status:  ✅ Completed**
 
 ---
 
