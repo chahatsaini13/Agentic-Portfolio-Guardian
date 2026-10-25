@@ -87,7 +87,7 @@ def fetch_news(company: str, thesis: str, page_size: int = 15) -> list:
             "pageSize": page_size,
             "apiKey": NEWSAPI_KEY,
         },
-        timeout=10,
+        timeout=20,
     )
 
     if resp.status_code != 200:
