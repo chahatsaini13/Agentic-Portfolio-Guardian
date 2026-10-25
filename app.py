@@ -212,11 +212,17 @@ def render_sidebar():
             if st.sidebar.button(item, key=f"nav_{item}", use_container_width=True):
                 st.session_state["page"] = item
                 st.rerun()
+    last_run = st.session_state.get("last_run_ts")
+    if last_run:
+        st.sidebar.markdown(
+            f'<div style="margin-top:2.5rem;padding:0 0.6rem;font-size:0.68rem;'
+            f'color:{C["text_muted"]};">Last analysis · {last_run}</div>',
+            unsafe_allow_html=True,
+        )
 
 
 def render_header():
     from views.common import run_analysis
-    last_run = st.session_state.get("last_run_ts") or "Not run yet"
     col1, col2 = st.columns([3, 2])
     with col1:
         st.markdown(f'''
@@ -224,7 +230,6 @@ def render_header():
           <div>
             <div class="kicker">Portfolio Intelligence</div>
             <h1>Chahat Saini</h1>
-            <div class="meta">Last analysis · {last_run}</div>
           </div>
         </div>''', unsafe_allow_html=True)
     with col2:

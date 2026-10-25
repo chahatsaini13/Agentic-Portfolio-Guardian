@@ -99,21 +99,25 @@ def start_background_scheduler_once():
 
 
 def init_state_from_cache():
-    """Called once at app startup (from app.py, right after the
-    st.session_state.setdefault() calls) so the dashboard shows the last
-    scheduled run immediately instead of being blank until someone clicks
-    'Run Full Analysis'. Never overwrites a final_state that's already
-    populated in this session (e.g. from a manual run earlier)."""
-    if st.session_state.get("final_state") is not None:
-        return
+    """Called on every rerun from app.py. Re-syncs the dashboard whenever the
+    scheduler has written a newer cache file than this session last saw.
+    A manual run in this session stays on screen until a newer scheduled run lands."""
     cached = load_latest_state()
     if cached is None:
+        return
+    if st.session_state.get("cache_ts_seen") == cached["last_updated"]:
         return
     st.session_state["final_state"] = {
         "final_output": cached["final_output"],
         "errors": cached["errors"],
     }
-    st.session_state["last_run_ts"] = cached["last_updated"] + " (cached)"
+    try:
+        st.session_state["last_run_ts"] = datetime.fromisoformat(
+            cached["last_updated"]
+        ).strftime("%b %d, %Y · %H:%M")
+    except Exception:
+        st.session_state["last_run_ts"] = cached["last_updated"]
+    st.session_state["cache_ts_seen"] = cached["last_updated"]
 
 
 def run_analysis():
