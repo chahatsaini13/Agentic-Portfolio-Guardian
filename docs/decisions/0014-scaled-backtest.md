@@ -35,7 +35,7 @@ not scored), same split guard.
   candidates were run on purpose, so that the bias test had enough decline
   cases.
 - **Machine.** Run on a different laptop (macOS, Python 3.9.6, Ollama
-  installed via Homebrew) than the pilot (Windows). Ollama and model builds
+  installed via Homebrew) than the pilot (OS and Ollama build of the pilot machine not recorded here). Ollama and model builds
   may differ; not checked.
 - **Parse failures** (see Validation) did not occur in the pilot.
 
