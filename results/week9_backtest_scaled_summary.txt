@@ -1,0 +1,65 @@
+log: results/week9_backtest_scaled_log.json | rows: 27
+direction_score values: {'unscored_parse_error': 23, 'incorrect': 1, 'n/a': 1, 'ambiguous_not_scored': 2}
+
+Failed / skipped / unusable rows:
+  ITC 1997-11-19: Not enough trailing history before 1997-11-19 (0 days, wanted ~252).
+
+##### STRICT (script-parsed verdicts) #####
+cases with an outcome: 26
+verdict distribution : {'NO_VERDICT': 23, 'HOLDS': 1, 'WEAKENING': 2}
+outcome distribution : {'DECLINE': 14, 'GROWTH': 12}
+scored (HOLDS/BROKEN): 1, correct: 0
+accuracy on scored   : 0.000
+majority baseline    : 1.000 (always predict DECLINE on the same scored cases)
+baseline on all 26   : 0.538 (always DECLINE)
+recall GROWTH  (HOLDS): 0/12
+recall DECLINE (BROKEN): 0/14
+DECLINE cases flagged WEAKENING or BROKEN: 2/14
+DECLINE cases called HOLDS: 1/14
+WEAKENING returned: 2, BROKEN returned: 0
+
+##### RECOVERED (verdict read from reasoning text) #####
+cases with an outcome: 26
+verdict distribution : {'WEAKENING': 6, 'HOLDS': 18, 'BROKEN': 2}
+outcome distribution : {'DECLINE': 14, 'GROWTH': 12}
+scored (HOLDS/BROKEN): 20, correct: 10
+accuracy on scored   : 0.500
+majority baseline    : 0.500 (always predict DECLINE on the same scored cases)
+baseline on all 26   : 0.538 (always DECLINE)
+recall GROWTH  (HOLDS): 9/12
+recall DECLINE (BROKEN): 1/14
+DECLINE cases flagged WEAKENING or BROKEN: 5/14
+DECLINE cases called HOLDS: 9/14
+WEAKENING returned: 6, BROKEN returned: 2
+
+Per-case table:
+ticker     cutoff      strict      recovered  outcome  fwd_ret
+TCS        2011-02-22  PARSE_ERROR WEAKENING  DECLINE  -0.1513
+TCS        2015-08-20  HOLDS       HOLDS      DECLINE  -0.1751
+TCS        2010-07-01  PARSE_ERROR HOLDS      GROWTH   0.5734
+INFY       2011-02-22  PARSE_ERROR HOLDS      DECLINE  -0.2865
+INFY       2003-07-07  PARSE_ERROR HOLDS      GROWTH   0.8328
+INFY       2001-10-03  PARSE_ERROR HOLDS      GROWTH   0.672
+RELIANCE   2011-04-06  PARSE_ERROR HOLDS      DECLINE  -0.2084
+RELIANCE   2003-05-08  PARSE_ERROR WEAKENING  GROWTH   0.9229
+RELIANCE   2007-04-12  PARSE_ERROR HOLDS      GROWTH   0.9007
+HDFCBANK   2000-03-23  PARSE_ERROR HOLDS      DECLINE  -0.2203
+HDFCBANK   2007-05-08  PARSE_ERROR HOLDS      GROWTH   0.763
+HDFCBANK   1999-02-25  PARSE_ERROR HOLDS      GROWTH   0.8058
+ITC        2016-06-21  PARSE_ERROR HOLDS      DECLINE  -0.3713
+ITC        2014-12-08  PARSE_ERROR HOLDS      DECLINE  -0.2563
+ITC        1997-11-19  None        None       None     None
+MARUTI     2018-07-24  PARSE_ERROR WEAKENING  DECLINE  -0.3375
+MARUTI     2015-08-19  PARSE_ERROR HOLDS      DECLINE  -0.2531
+MARUTI     2014-03-04  PARSE_ERROR HOLDS      GROWTH   0.827
+SUNPHARMA  2018-09-06  WEAKENING   WEAKENING  DECLINE  -0.3265
+SUNPHARMA  2005-10-27  PARSE_ERROR HOLDS      GROWTH   0.6448
+SUNPHARMA  1999-01-21  PARSE_ERROR BROKEN     GROWTH   0.8867
+ADANIENT   2011-07-07  PARSE_ERROR HOLDS      DECLINE  -0.5994
+ADANIENT   2013-03-11  WEAKENING   WEAKENING  DECLINE  -0.4344
+ADANIENT   2005-11-14  PARSE_ERROR HOLDS      GROWTH   2.2196
+YESBANK    2019-03-26  PARSE_ERROR BROKEN     DECLINE  -0.8736
+YESBANK    2013-02-25  PARSE_ERROR HOLDS      DECLINE  -0.5289
+YESBANK    2014-02-26  PARSE_ERROR WEAKENING  GROWTH   1.0719
+
+Cases with lookback < 252 days: [('HDFCBANK', '1999-02-25', 234), ('SUNPHARMA', '1999-01-21', 209)]

@@ -1,0 +1,506 @@
+{
+  "run_at": "2026-10-27T01:44:26",
+  "lookback_days": 252,
+  "forward_days": 126,
+  "results": [
+    {
+      "ticker": "TCS",
+      "cutoff_date": "2011-02-22",
+      "features": {
+        "cutoff_date": "2011-02-22",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.4887,
+        "volatility_annualized": 0.2717,
+        "max_drawdown": -0.1687,
+        "value_at_risk_95": -0.0226,
+        "conditional_var_95": -0.0293,
+        "downside_deviation": 0.1561
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"WEAKENING\",\n  \"reasoning\": \"While TCS's fundamental metrics appear strong in the 252-day trailing window, the high volatility_annualized (0.2717) and relatively high max_drawdown (-0.1687) suggest that the stock may be due for a correction. The conditional_var_95 (-0.0293) and downside_deviation (0.1561) also indicate a degree of risk associated with the stock's recent performance. These metrics do not strongly support the continuation of TCS's recent fundamental strength.\"",
+      "actual_forward_return": -0.1513,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "TCS",
+      "cutoff_date": "2015-08-20",
+      "features": {
+        "cutoff_date": "2015-08-20",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.0878,
+        "volatility_annualized": 0.2332,
+        "max_drawdown": -0.1477,
+        "value_at_risk_95": -0.0204,
+        "conditional_var_95": -0.0327,
+        "downside_deviation": 0.1689
+      },
+      "llm_verdict": "HOLDS",
+      "llm_reasoning": "The trailing cumulative return of 0.0878 indicates a long-term positive trend, supporting the thesis. The annualized volatility of 0.2332 is within reasonable bounds, suggesting stability. The max drawdown of -0.1477 is relatively low, implying a resilient stock. These fundamentals collectively suggest that TCS's recent strength is likely to continue.",
+      "actual_forward_return": -0.1751,
+      "actual_outcome": "DECLINE",
+      "direction_score": "incorrect"
+    },
+    {
+      "ticker": "TCS",
+      "cutoff_date": "2010-07-01",
+      "features": {
+        "cutoff_date": "2010-07-01",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.8626,
+        "volatility_annualized": 0.3342,
+        "max_drawdown": -0.1687,
+        "value_at_risk_95": -0.0254,
+        "conditional_var_95": -0.0336,
+        "downside_deviation": 0.1819
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The fundamentals presented show a solid foundation for TCS's continuation, as the trailing cumulative return of 0.8626 indicates a positive momentum, while the volatility of 0.3342 and value at risk of -0.0254 suggest relatively stable market conditions. Additionally, the max drawdown of -0.1687 and the downside deviation of 0.1819 demonstrate a manageable risk profile. These metrics collectively support the thesis that TCS's recent fundamental strength will continue to drive the stock's performance.\"",
+      "actual_forward_return": 0.5734,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "INFY",
+      "cutoff_date": "2011-02-22",
+      "features": {
+        "cutoff_date": "2011-02-22",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.2208,
+        "volatility_annualized": 0.2124,
+        "max_drawdown": -0.1265,
+        "value_at_risk_95": -0.0229,
+        "conditional_var_95": -0.0288,
+        "downside_deviation": 0.1486
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"INFY's recent fundamental strength is evident in its trailing cumulative return of 0.2208, indicating a steady growth trajectory. Volatility and drawdown profile also suggest a relatively stable investment environment. These fundamentals suggest that INFY's recent performance is likely to continue supporting the stock going forward.\"",
+      "actual_forward_return": -0.2865,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "INFY",
+      "cutoff_date": "2003-07-07",
+      "features": {
+        "cutoff_date": "2003-07-07",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.0914,
+        "volatility_annualized": 0.4892,
+        "max_drawdown": -0.4632,
+        "value_at_risk_95": -0.0346,
+        "conditional_var_95": -0.0735,
+        "downside_deviation": 0.3912
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"INFY's trailing cumulative return of -0.0914 is negative, but its volatility (0.4892) and max drawdown (-0.4632) suggest that the stock has recently experienced some degree of volatility. However, the volatility and max drawdown are not extreme, and the negative return is not catastrophic. The conditional variance at 95% (0.0735) and value at risk at 95% (-0.0346) are low, indicating that the stock's downside risk is manageable. Overall, the fundamentals trend suggests that INFY's recent strength may continue to support the stock.\"",
+      "actual_forward_return": 0.8328,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "INFY",
+      "cutoff_date": "2001-10-03",
+      "features": {
+        "cutoff_date": "2001-10-03",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.7151,
+        "volatility_annualized": 0.6902,
+        "max_drawdown": -0.7287,
+        "value_at_risk_95": -0.0778,
+        "conditional_var_95": -0.1088,
+        "downside_deviation": 0.5279
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"INFY's recent fundamental strength, as measured by its trailing cumulative return of -0.7151, volatility annualized at 0.6902, max drawdown of -0.7287, value at risk 95 of -0.0778, conditional variance 95 of -0.1088, and downside deviation of 0.5279, indicates a stable trend. A stable trend with these fundamental metrics suggests that the stock's recent performance is likely to continue, supporting the thesis that INFY's fundamental strength will continue to support the stock going forward.\"",
+      "actual_forward_return": 0.672,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "RELIANCE",
+      "cutoff_date": "2011-04-06",
+      "features": {
+        "cutoff_date": "2011-04-06",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.0709,
+        "volatility_annualized": 0.2541,
+        "max_drawdown": -0.2016,
+        "value_at_risk_95": -0.0275,
+        "conditional_var_95": -0.0332,
+        "downside_deviation": 0.1777
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of -0.0709 is not excessively negative, suggesting that the stock has not yet fully corrected. The volatility annualized at 0.2541 indicates relatively stable price movements, and the max drawdown of -0.2016 is within a reasonable range. The lower value-at-risk and conditional variance values further support this assessment, suggesting that the stock's recent fundamental strength is likely to continue supporting it forward.\"",
+      "actual_forward_return": -0.2084,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "RELIANCE",
+      "cutoff_date": "2003-05-08",
+      "features": {
+        "cutoff_date": "2003-05-08",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.1067,
+        "volatility_annualized": 0.3085,
+        "max_drawdown": -0.2563,
+        "value_at_risk_95": -0.0309,
+        "conditional_var_95": -0.0354,
+        "downside_deviation": 0.1972
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"WEAKENING\",\n  \"reasoning\": \"Although RELIANCE's fundamentals appear to be strong, a single data point (the trailing 252-day window) may not be sufficient to draw conclusions about future performance. The 252-day trailing cumulative return of -0.1067 is actually negative, which suggests that the stock has been trending downward. This single metric may not accurately represent the stock's long-term prospects.\"",
+      "actual_forward_return": 0.9229,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "RELIANCE",
+      "cutoff_date": "2007-04-12",
+      "features": {
+        "cutoff_date": "2007-04-12",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.6857,
+        "volatility_annualized": 0.3641,
+        "max_drawdown": -0.2997,
+        "value_at_risk_95": -0.0354,
+        "conditional_var_95": -0.0509,
+        "downside_deviation": 0.239
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.6857 indicates a strong historical trend of price momentum. The volatility and drawdown profile suggest a relatively stable investment. The value at risk and conditional variance metrics also show a moderate level of risk. These fundamentals suggest that the thesis is supported by historical data.\"",
+      "actual_forward_return": 0.9007,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "HDFCBANK",
+      "cutoff_date": "2000-03-23",
+      "features": {
+        "cutoff_date": "2000-03-23",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 3.506,
+        "volatility_annualized": 0.5923,
+        "max_drawdown": -0.1803,
+        "value_at_risk_95": -0.0522,
+        "conditional_var_95": -0.0645,
+        "downside_deviation": 0.3262
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 3.506% indicates that the stock has shown recent strong price momentum. The volatility, measured by the annualized 0.5923%, is relatively low, suggesting that the stock has been relatively stable. The max drawdown of -0.1803% is also minimal, indicating a reduced risk profile. Therefore, based on the fundamentals trend alone, it is reasonable to expect that the stock's recent fundamental strength will continue supporting it.\"",
+      "actual_forward_return": -0.2203,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "HDFCBANK",
+      "cutoff_date": "2007-05-08",
+      "features": {
+        "cutoff_date": "2007-05-08",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.1279,
+        "volatility_annualized": 0.3826,
+        "max_drawdown": -0.2809,
+        "value_at_risk_95": -0.0359,
+        "conditional_var_95": -0.0462,
+        "downside_deviation": 0.2485
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.1279 indicates a relatively strong price momentum. The volatility annualized of 0.3826 and max drawdown of -0.2809 suggest a reasonable level of risk. These fundamentals suggest that HDFCBANK's recent strength is unlikely to immediately reverse, suggesting the thesis holds.\"",
+      "actual_forward_return": 0.763,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "HDFCBANK",
+      "cutoff_date": "1999-02-25",
+      "features": {
+        "cutoff_date": "1999-02-25",
+        "lookback_days_actual": 234,
+        "trailing_cumulative_return": -0.295,
+        "volatility_annualized": 0.4842,
+        "max_drawdown": -0.3988,
+        "value_at_risk_95": -0.05,
+        "conditional_var_95": -0.0611,
+        "downside_deviation": 0.3364
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of -0.295% is a relatively stable negative value, indicating a consistent decline in stock price over the trailing 234-day window. However, the volatility annualized of 0.4842% and the max drawdown of -0.3988% suggest a relatively low-risk profile. The value-at-risk at 95% confidence and conditional variance at 95% confidence are both relatively low, indicating a low likelihood of extreme losses. Overall, these fundamentals suggest that HDFCBANK's recent fundamental strength may continue to support the stock.\"",
+      "actual_forward_return": 0.8058,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "ITC",
+      "cutoff_date": "2016-06-21",
+      "features": {
+        "cutoff_date": "2016-06-21",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.1939,
+        "volatility_annualized": 0.2672,
+        "max_drawdown": -0.2019,
+        "value_at_risk_95": -0.024,
+        "conditional_var_95": -0.0334,
+        "downside_deviation": 0.1741
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The fundamentals of ITC show a steady increase in price momentum, with a trailing cumulative return of 0.1939 over the last 252 days. The volatility has remained relatively stable at 0.2672, indicating no extreme market fluctuations. Although the max drawdown is -0.2019, this value is still within a relatively low range. Overall, these metrics suggest a consistent and stable investment trend, supporting the thesis that ITC's recent fundamental strength will continue to support the stock.\"",
+      "actual_forward_return": -0.3713,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "ITC",
+      "cutoff_date": "2014-12-08",
+      "features": {
+        "cutoff_date": "2014-12-08",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.2674,
+        "volatility_annualized": 0.2039,
+        "max_drawdown": -0.1417,
+        "value_at_risk_95": -0.0183,
+        "conditional_var_95": -0.0307,
+        "downside_deviation": 0.1436
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The 252-day trailing cumulative return of 0.2674 indicates a history of positive returns, which is a strong fundamental indicator. The annualized volatility of 0.2039 suggests that the stock has experienced relatively stable price movements. The max drawdown of -0.1417, though negative, is within the realm of acceptable risk for a long-term investment. These fundamentals collectively suggest that the stock's recent fundamental strength is likely to continue supporting it going forward.\"",
+      "actual_forward_return": -0.2563,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "ITC",
+      "cutoff_date": "1997-11-19",
+      "error": "Not enough trailing history before 1997-11-19 (0 days, wanted ~252)."
+    },
+    {
+      "ticker": "MARUTI",
+      "cutoff_date": "2018-07-24",
+      "features": {
+        "cutoff_date": "2018-07-24",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.3072,
+        "volatility_annualized": 0.1861,
+        "max_drawdown": -0.1439,
+        "value_at_risk_95": -0.0152,
+        "conditional_var_95": -0.0199,
+        "downside_deviation": 0.1106
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"WEAKENING\",\n  \"reasoning\": \"Although MARUTI's recent fundamentals show a positive cumulative return, its volatility and drawdown profile are not particularly noteworthy. The low max_drawdown and value_at_risk_95 suggest that the stock has not experienced a significant downturn. Furthermore, the downside_deviation is within a relatively typical range for this time frame. Considering these factors, the thesis that MARUTI's fundamental strength will continue is weakened.\"",
+      "actual_forward_return": -0.3375,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "MARUTI",
+      "cutoff_date": "2015-08-19",
+      "features": {
+        "cutoff_date": "2015-08-19",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.7523,
+        "volatility_annualized": 0.2063,
+        "max_drawdown": -0.0852,
+        "value_at_risk_95": -0.0159,
+        "conditional_var_95": -0.0236,
+        "downside_deviation": 0.1173
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.7523 indicates a strong fundamental trend, suggesting that the stock's recent performance is likely to continue. The volatility and maximum drawdown values also suggest that the stock has been less volatile and experienced less drawdown than average, which can be a sign of strong underlying fundamentals. The relatively low value-at-risk and conditional variance values further support this view, indicating that the stock is less susceptible to extreme price movements. Overall, the fundamentals trend alone suggests that the thesis holds.\"",
+      "actual_forward_return": -0.2531,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "MARUTI",
+      "cutoff_date": "2014-03-04",
+      "features": {
+        "cutoff_date": "2014-03-04",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.1668,
+        "volatility_annualized": 0.3445,
+        "max_drawdown": -0.304,
+        "value_at_risk_95": -0.0273,
+        "conditional_var_95": -0.0429,
+        "downside_deviation": 0.2162
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.1668 indicates a long-term upward trend, suggesting that the stock's recent fundamental strength may be sustainable. Volatility and drawdown profile metrics are relatively stable, with annualized volatility of 0.3445 and a max drawdown of -0.304. This stability in volatility and drawdown profile may indicate that the stock's recent price momentum is likely to continue supporting the stock going forward.\"",
+      "actual_forward_return": 0.827,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "cutoff_date": "2018-09-06",
+      "features": {
+        "cutoff_date": "2018-09-06",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.3803,
+        "volatility_annualized": 0.3216,
+        "max_drawdown": -0.2496,
+        "value_at_risk_95": -0.0263,
+        "conditional_var_95": -0.0393,
+        "downside_deviation": 0.1974
+      },
+      "llm_verdict": "WEAKENING",
+      "llm_reasoning": "While SUNPHARMA's recent fundamentals are strong, the given 252-day trailing window is relatively short. The max_drawdown of -0.2496, while not extremely high, is still above the value of 0, indicating a potential risk. Additionally, the conditional_var_95 of -0.0393 suggests a moderate level of uncertainty, which may be a cause for concern.",
+      "actual_forward_return": -0.3265,
+      "actual_outcome": "DECLINE",
+      "direction_score": "ambiguous_not_scored"
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "cutoff_date": "2005-10-27",
+      "features": {
+        "cutoff_date": "2005-10-27",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.238,
+        "volatility_annualized": 0.3293,
+        "max_drawdown": -0.2278,
+        "value_at_risk_95": -0.0301,
+        "conditional_var_95": -0.0415,
+        "downside_deviation": 0.2155
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.238 suggests a historical trend of growth, while the volatility, max drawdown, and value-at-risk metrics indicate stability. The downside deviation is lower than the volatility, indicating that the recent fundamental strength may continue. The other metrics also suggest a strong foundation for the stock's future performance, although no specific news is available to further support the thesis.\"",
+      "actual_forward_return": 0.6448,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "SUNPHARMA",
+      "cutoff_date": "1999-01-21",
+      "features": {
+        "cutoff_date": "1999-01-21",
+        "lookback_days_actual": 209,
+        "trailing_cumulative_return": 0.192,
+        "volatility_annualized": 0.5981,
+        "max_drawdown": -0.3842,
+        "value_at_risk_95": -0.0576,
+        "conditional_var_95": -0.0722,
+        "downside_deviation": 0.389
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"BROKEN\",\n  \"reasoning\": \"While SUNPHARMA's recent fundamentals appear strong, the trailing 209-day window only covers data up to 1999-01-21, making it impossible to assess the stock's recent performance. Therefore, it is not possible to determine whether the fundamentals will continue to support the stock going forward based solely on the provided data.\"",
+      "actual_forward_return": 0.8867,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "ADANIENT",
+      "cutoff_date": "2011-07-07",
+      "features": {
+        "cutoff_date": "2011-07-07",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.3296,
+        "volatility_annualized": 0.3472,
+        "max_drawdown": -0.2675,
+        "value_at_risk_95": -0.0243,
+        "conditional_var_95": -0.0463,
+        "downside_deviation": 0.2453
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"The trailing cumulative return of 0.3296 indicates a history of stability and growth. Volatility of 0.3472 is moderate, but the max drawdown of -0.2675 suggests a relatively low risk of further decline. These fundamentals suggest that ADANIENT's recent fundamental strength may continue supporting the stock going forward.\"",
+      "actual_forward_return": -0.5994,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "ADANIENT",
+      "cutoff_date": "2013-03-11",
+      "features": {
+        "cutoff_date": "2013-03-11",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.2541,
+        "volatility_annualized": 0.4636,
+        "max_drawdown": -0.5374,
+        "value_at_risk_95": -0.0467,
+        "conditional_var_95": -0.0617,
+        "downside_deviation": 0.3297
+      },
+      "llm_verdict": "WEAKENING",
+      "llm_reasoning": "The recent fundamentals do not show significant improvement over the trailing 252-day window. The trailing cumulative return is negative, indicating a loss. Additionally, the max drawdown is negative, suggesting the stock has been declining. The volatility and value-at-risk measures are also higher than expected, indicating increased uncertainty.",
+      "actual_forward_return": -0.4344,
+      "actual_outcome": "DECLINE",
+      "direction_score": "ambiguous_not_scored"
+    },
+    {
+      "ticker": "ADANIENT",
+      "cutoff_date": "2005-11-14",
+      "features": {
+        "cutoff_date": "2005-11-14",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.0025,
+        "volatility_annualized": 0.4271,
+        "max_drawdown": -0.3053,
+        "value_at_risk_95": -0.0341,
+        "conditional_var_95": -0.0463,
+        "downside_deviation": 0.2371
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"ADANIENT's trailing cumulative return of -0.0025 is relatively stable, indicating a consistent performance trend. Its volatility, annualized at 0.4271, suggests a moderate level of risk. The stock's max drawdown of -0.3053 and value-at-risk of -0.0341 at the 95th percentile imply a reasonable risk profile. While the conditional variance and downside deviation of 0.0463 and 0.2371, respectively, may suggest some uncertainty, the overall fundamentals trend supports the thesis.\"",
+      "actual_forward_return": 2.2196,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "YESBANK",
+      "cutoff_date": "2019-03-26",
+      "features": {
+        "cutoff_date": "2019-03-26",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.1596,
+        "volatility_annualized": 0.6584,
+        "max_drawdown": -0.592,
+        "value_at_risk_95": -0.0498,
+        "conditional_var_95": -0.0902,
+        "downside_deviation": 0.4473
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"BROKEN\",\n  \"reasoning\": \"The thesis claims that YESBANK's recent fundamental strength will continue to support the stock. However, the trailing cumulative return of -0.1596 is a negative return over a 252-day window, indicating a decline in the stock's price momentum. Furthermore, the max_drawdown of -0.592 is a relatively high drawdown, suggesting a history of volatility. Therefore, the recent fundamental strength may not be sustainable, and the thesis is broken.\"",
+      "actual_forward_return": -0.8736,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "YESBANK",
+      "cutoff_date": "2013-02-25",
+      "features": {
+        "cutoff_date": "2013-02-25",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": 0.4969,
+        "volatility_annualized": 0.326,
+        "max_drawdown": -0.2242,
+        "value_at_risk_95": -0.0293,
+        "conditional_var_95": -0.0382,
+        "downside_deviation": 0.1994
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"HOLDS\",\n  \"reasoning\": \"YESBANK's fundamentals have shown strong price momentum (0.4969 trailing cumulative return) and a relatively low volatility (0.326 annualized). The max drawdown (-0.2242) and downside deviation (0.1994) also suggest a stable profile. While a high conditional variance (-0.0382) is present, it is unlikely to impact the overall trend given the other strong fundamentals.\"",
+      "actual_forward_return": -0.5289,
+      "actual_outcome": "DECLINE",
+      "direction_score": "unscored_parse_error"
+    },
+    {
+      "ticker": "YESBANK",
+      "cutoff_date": "2014-02-26",
+      "features": {
+        "cutoff_date": "2014-02-26",
+        "lookback_days_actual": 252,
+        "trailing_cumulative_return": -0.3652,
+        "volatility_annualized": 0.612,
+        "max_drawdown": -0.585,
+        "value_at_risk_95": -0.0647,
+        "conditional_var_95": -0.0904,
+        "downside_deviation": 0.419
+      },
+      "llm_verdict": "PARSE_ERROR",
+      "llm_reasoning": "{\n  \"thesis_status\": \"WEAKENING\",\n  \"reasoning\": \"Although YESBANK has shown recent fundamental strength in terms of price momentum, volatility, and drawdown profile, the trailing cumulative return of -0.3652 is significantly negative over a 252-day window, indicating potential underlying issues. Furthermore, the max_drawdown of -0.585 is substantial, suggesting that the stock may be vulnerable to further price declines. Without more recent news, it is difficult to confirm whether this trend will continue.\"",
+      "actual_forward_return": 1.0719,
+      "actual_outcome": "GROWTH",
+      "direction_score": "unscored_parse_error"
+    }
+  ]
+}

@@ -162,7 +162,7 @@ Load Orchestrator's combined JSON output (final_state["final_output"])
 |---|---|
 | ✅ Validate sentiment agent accuracy against Financial PhraseBank — see ADR 0011 | Member 2 |
 | ✅ Measure contrastive embedding separation quality (e.g. cluster purity/silhouette score) vs generic embedding baseline — see ADR 0011 | Member 2 |
-| Backtest thesis-flip detection on historical NSE data (1990–2021) | Member 1 |
+| ✅ Backtest thesis-flip detection on historical NSE data (1990–2021) — fundamentals-only pilot (6 cases) see ADR 0012; scaled run (27 cases) see ADR 0014 (`docs/decisions/0014-scaled-backtest.md`) | Member 1 |
 | Document results in `docs/decisions/` | Both |
 | Full end-to-end demo for supervisor review | Both |
 **Pipeline:**
