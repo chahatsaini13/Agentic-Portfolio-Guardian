@@ -205,7 +205,11 @@ def build_backtest_prompt(ticker: str, features: dict) -> str:
         f"volatility, and drawdown profile) to continue supporting the stock "
         f"going forward."
     )
-
+    pct_features = {
+        k: f"{v * 100:.1f}%"
+        for k, v in features.items()
+        if k not in ("cutoff_date", "lookback_days_actual")
+    }
     return f"""You are an investment thesis reviewer. Judge whether the following
 fundamentals-based reasoning still holds, using ONLY the data given - no
 external knowledge of what actually happened to this stock afterward.
@@ -214,7 +218,7 @@ TICKER: {ticker}
 THESIS: "{thesis}"
 
 FUNDAMENTALS AS OF {features['cutoff_date']} (trailing {features['lookback_days_actual']}-day window):
-{json.dumps({k: v for k, v in features.items() if k not in ('cutoff_date', 'lookback_days_actual')}, indent=2)}
+{json.dumps(pct_features, indent=2)}
 
 RECENT NEWS: Not available - historical NewsAPI archive does not exist for
 this backtest. Base your judgment on the fundamentals trend alone.
