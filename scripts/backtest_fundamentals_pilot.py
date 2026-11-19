@@ -223,9 +223,14 @@ FUNDAMENTALS AS OF {features['cutoff_date']} (trailing {features['lookback_days_
 RECENT NEWS: Not available - historical NewsAPI archive does not exist for
 this backtest. Base your judgment on the fundamentals trend alone.
 
+RULES:
+1. All figures above are percentages. 350.6% means 3.5 times growth, not 3.5 percent.
+2. If trailing_cumulative_return is below -30% or max_drawdown is below -40%, do NOT answer HOLDS unless your reasoning explains clearly why the thesis still holds. Otherwise answer WEAKENING or BROKEN.
+3. If the trailing window is shorter than 252 days, answer INSUFFICIENT_DATA.
+
 Respond with ONLY a valid JSON object, no markdown fences, no commentary:
 {{
-  "thesis_status": "HOLDS" | "WEAKENING" | "BROKEN",
+  "thesis_status": "HOLDS" | "WEAKENING" | "BROKEN" | "INSUFFICIENT_DATA",
   "reasoning": "2-4 sentences explaining the verdict, referencing the specific fundamentals given"
 }}
 """
@@ -234,7 +239,7 @@ Respond with ONLY a valid JSON object, no markdown fences, no commentary:
 def call_ollama(prompt: str) -> str:
     resp = requests.post(
         OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False, "format": "json", "options": {"num_predict": 400}},
+        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False, "format": "json", "options": {"num_predict": 400 , "temperature": 0}},
         timeout=300,
     )
     resp.raise_for_status()
@@ -267,6 +272,8 @@ def score_direction(verdict: str, actual: str) -> str:
         return "correct" if actual == "DECLINE" else "incorrect"
     if verdict == "WEAKENING":
         return "ambiguous_not_scored"
+    if verdict == "INSUFFICIENT_DATA":
+        return "not_scored_insufficient_data"
     return "unscored_parse_error"
 
 
@@ -276,6 +283,18 @@ def run_case(data_dir: str, ticker: str, cutoff_str: str, lookback_days: int, fo
 
     features = compute_features_at_cutoff(series, cutoff, lookback_days)
     outcome = classify_actual_outcome(series, cutoff, forward_days)
+
+    if features["lookback_days_actual"] < lookback_days:
+        return {
+            "ticker": ticker,
+            "cutoff_date": features["cutoff_date"],
+            "features": features,
+            "llm_verdict": "INSUFFICIENT_DATA",
+            "llm_reasoning": f"Only {features['lookback_days_actual']} days of history (< {lookback_days}); LLM not called.",
+            "actual_forward_return": outcome["forward_return"],
+            "actual_outcome": outcome["actual_outcome"],
+            "direction_score": "not_scored_insufficient_data",
+        }
 
     prompt = build_backtest_prompt(ticker, features)
     raw = call_ollama(prompt)
