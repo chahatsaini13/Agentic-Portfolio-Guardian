@@ -230,7 +230,7 @@ Respond with ONLY a valid JSON object, no markdown fences, no commentary:
 def call_ollama(prompt: str) -> str:
     resp = requests.post(
         OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False, "options": {"num_predict": 400}},
+        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False, "format": "json", "options": {"num_predict": 400}},
         timeout=300,
     )
     resp.raise_for_status()
