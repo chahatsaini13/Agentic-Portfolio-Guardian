@@ -44,6 +44,7 @@ only separates routine vs red-flag, it doesn't sub-categorize *why*
 something's a red flag. Category labels are still useful for the alert
 output, so this keyword lookup stays as a permanent (non-swapped) helper.
 """
+from __future__ import annotations
 
 _REDFLAG_THRESHOLD = 0.5  # matches sentiment_tagger.py's DEFAULT_RELEVANCE_THRESHOLD-style
                            # convention of naming the constant instead of hardcoding it inline
