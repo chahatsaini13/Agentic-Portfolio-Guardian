@@ -32,6 +32,7 @@ from dotenv import load_dotenv
 from src.agents.portfolio_health_agent import load_portfolio
 from src.agents.news_filter import filter_news_by_relevance
 from src.agents.sentiment_tagger import tag_sentiment
+from src.llm_client import call_llm
 
 # filter_news_by_relevance() takes any two texts to embed and compare -
 # it was written for (thesis, news_text) in Week 3, but nothing about it
@@ -159,13 +160,7 @@ before or after, in exactly this shape:
 
 
 def call_ollama(prompt: str) -> str:
-    resp = requests.post(
-        OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
-        timeout=300,
-    )
-    resp.raise_for_status()
-    return resp.json()["response"]
+    return call_llm(prompt)
 
 
 def parse_summary_output(raw: str) -> str:
