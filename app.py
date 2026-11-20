@@ -245,6 +245,14 @@ def render_header():
         with b4:
             st.markdown('<div class="avatar">CS</div>', unsafe_allow_html=True)
 
+def render_disclaimer():
+    st.markdown(
+        f'<div style="font-size:0.7rem; color:{C["text_muted"]}; padding:0.2rem 0;">'
+        f'Informational only. Not investment advice. This tool does not issue buy or sell recommendations.'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
 
 # ================= Main =================
 
@@ -252,6 +260,7 @@ page = st.session_state["page"]
 inject_css(no_scroll=(page == "Dashboard"))
 render_sidebar()
 render_header()
+render_disclaimer()
 
 if page == "Dashboard":
     page_dashboard()
