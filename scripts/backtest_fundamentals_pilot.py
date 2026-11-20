@@ -41,6 +41,7 @@ from src.agents.portfolio_health_agent import (
     compute_volatility, compute_max_drawdown, compute_var, compute_cvar,
     compute_downside_deviation,
 )
+from src.llm_client import call_llm
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1")
@@ -237,13 +238,7 @@ Respond with ONLY a valid JSON object, no markdown fences, no commentary:
 
 
 def call_ollama(prompt: str) -> str:
-    resp = requests.post(
-        OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False, "format": "json", "options": {"num_predict": 400 , "temperature": 0}},
-        timeout=300,
-    )
-    resp.raise_for_status()
-    return resp.json()["response"]
+    return call_llm(prompt, json_mode=True, temperature=0, num_predict=400)
 
 
 def parse_verdict(raw: str) -> dict:
