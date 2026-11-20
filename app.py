@@ -26,10 +26,11 @@ from views.rebalancing import page_rebalancing
 from views.markets import page_markets
 from views.early_warning import page_early_warning
 from views.reports import page_reports
+from views.history import page_history
 
 st.set_page_config(page_title="Portfolio Intelligence", page_icon="🍷", layout="wide")
 
-NAV_ITEMS = ["Dashboard", "Portfolio", "Risk", "Thesis", "Markets", "Early Warning", "Rebalancing", "Reports", "Settings"]
+NAV_ITEMS = ["Dashboard", "Portfolio", "Risk", "Thesis", "Markets", "Early Warning", "Rebalancing", "Reports","History", "Settings"]
 st.session_state.setdefault("page", "Dashboard")
 st.session_state.setdefault("final_state", None)
 st.session_state.setdefault("last_run_ts", None)
@@ -280,5 +281,7 @@ elif page == "Early Warning":
     page_early_warning()
 elif page == "Reports":
     page_reports()
+elif page == "History": 
+    page_history()
 else:
     page_placeholder(page)
