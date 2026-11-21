@@ -116,6 +116,15 @@ not treated as resolved.
 - Contrastive relevance model trained on a small dataset (8 investment
   theses) - strong held-out evaluation results, but not yet validated at scale
 - Not intended as investment advice; outputs are informational only
+- `LLM_PROVIDER=api` is not implemented yet (raises `NotImplementedError`);
+  only the local Ollama provider works
+- The full pipeline has been run end to end only with Ollama and
+  `llama3.2`; other models and providers are untested
+- The small local model sometimes returns malformed JSON; the parsers fall
+  back to regex recovery or raw text (observed in a full run)
+- News coverage from NewsAPI is sparse for some tickers, and the thesis and
+  market-intelligence agents query separately, so they can return different
+  articles for the same stock (observed in a full run)
 
 ## Decision log
 Every meaningful design decision is recorded in `docs/decisions/` as an
