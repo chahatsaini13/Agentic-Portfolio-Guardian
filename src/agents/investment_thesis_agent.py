@@ -23,6 +23,7 @@ import requests
 import yfinance as yf
 from dotenv import load_dotenv
 from src.agents.news_filter import filter_news_by_relevance, DEFAULT_RELEVANCE_THRESHOLD
+from src.llm_client import call_llm
 
 load_dotenv()  # reads .env in the current directory, sets values into os.environ
 
@@ -148,21 +149,7 @@ before or after, in exactly this shape:
 
 
 def call_ollama(prompt: str) -> str:
-    """Send the prompt to a locally running Ollama model, non-streamed."""
-    resp = requests.post(
-        OLLAMA_URL,
-        json={
-            "model": OLLAMA_MODEL,
-            "prompt": prompt,
-            "stream": False,
-            "options": {"num_predict": 500},
-        },
-        timeout=300,
-        
-    )
-    resp.raise_for_status()
-    data = resp.json()
-    return data["response"]
+    return call_llm(prompt, num_predict=500)
 
 
 def parse_model_output(raw: str) -> dict:

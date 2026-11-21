@@ -27,6 +27,7 @@ import pandas as pd
 import requests
 import yfinance as yf
 from scipy.optimize import minimize
+from src.llm_client import call_llm
 
 RISK_FREE_RATE = 0.07          # rough proxy for Indian 10Y G-sec yield
 TRADING_DAYS = 252
@@ -598,10 +599,7 @@ PORTFOLIO REPORT:
 {json.dumps(report, indent=2, default=str)}
 """
     try:
-        resp = requests.post(OLLAMA_URL, json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
-                              timeout=300)
-        resp.raise_for_status()
-        return resp.json()["response"].strip()
+        return call_llm(prompt).strip()
     except requests.exceptions.ConnectionError:
         return "[Ollama not running - AI summary unavailable. Run `ollama serve` to enable it.]"
     except Exception as e:

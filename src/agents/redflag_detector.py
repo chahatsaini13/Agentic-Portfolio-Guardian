@@ -54,6 +54,7 @@ rule-based (imported from the original keyword-based redflag_detector.py
 logic), since a 2-cluster (routine vs red-flag) model has no way to
 sub-categorize *why* something is a red flag.
 """
+from __future__ import annotations
 
 import json
 import os

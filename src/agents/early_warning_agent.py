@@ -34,6 +34,7 @@ from dotenv import load_dotenv
 from src.agents.portfolio_health_agent import load_portfolio
 from src.agents.market_intelligence_agent import fetch_company_name, fetch_news
 from src.agents.redflag_detector import check_signal_agreement, is_red_flag, classify_flag_type
+from src.llm_client import call_llm
 
 load_dotenv()
 
@@ -97,14 +98,7 @@ before or after, in exactly this shape:
 
 
 def call_ollama(prompt: str) -> str:
-    """Same call shape as every other agent's call_ollama()."""
-    resp = requests.post(
-        OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
-        timeout=300,
-    )
-    resp.raise_for_status()
-    return resp.json()["response"]
+    return call_llm(prompt)
 
 
 def parse_severity_output(raw: str) -> dict:
