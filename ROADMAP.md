@@ -186,7 +186,23 @@ Additional polish already completed ahead of this week's original scope:
 - `.env.example` fix
 - Ollama timeout fix (`timeout=300` across all four agent files)
 - Failure-mode validation doc (`docs/validation/failure_mode_testing.md`)
-**Status:  ✅ Completed**
+**Status: 🔄 In progress**
+
+---
+
+## Remaining Work (as of 21 Nov 2026)
+
+Split: Navneet takes backtest / data / database; Chahat takes UI / docs / demo.
+
+| Item | Owner | Status |
+|---|---|---|
+| "Not investment advice" notice on every page | Chahat | ✅ Done |
+| History page UI (`views/history.py`) | Chahat | 🔄 Built against a placeholder `load_history`; real data waits on `src/db.py` |
+| Run history storage (`src/db.py`: `save_run`, `load_history`) | Navneet | 🔄 In progress |
+| New 50-case backtest (new numbers to be added once available) | Navneet | ⏳ Pending |
+| Demo script + screenshots for the presentation | Chahat | ⏳ Pending |
+| Login | Chahat | 📝 Planned (only after the items above) |
+| Code cleanup / docstrings, demo video, v1.0 tag | Both | ⏳ Pending |
 
 ---
 
