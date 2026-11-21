@@ -138,10 +138,33 @@ requirements.txt
 ```
 
 ## Setup
-```
+
+1. Install the Python dependencies:
 pip install -r requirements.txt
-cp .env.example .env # then fill in your keys
-```
+
+2. Install Ollama and pull the model:
+ollama pull llama3.2
+ollama list
+The model name in your `.env` (`OLLAMA_MODEL`) must match exactly what
+`ollama list` shows (e.g. `llama3.2:latest`). If it doesn't match, Ollama
+returns a 404.
+
+3. Create your `.env` from the template and fill in your keys:
+cp .env.example .env # macOS / Linux
+copy .env.example .env # Windows
+- `NEWSAPI_KEY`: your NewsAPI key
+- `OLLAMA_MODEL`: set to `llama3.2` (the model this project was run with)
+- `LLM_PROVIDER`: optional, defaults to `ollama`. `LLM_PROVIDER=api` is
+  not implemented yet and raises `NotImplementedError`.
+
+Never commit `.env`.
+
+4. Hugging Face access: the relevance model
+(`navneet11/contrastive-relevance-v1`) is hosted in a private repo. You
+need a Hugging Face account that has been granted access to it, and you
+must be logged in on your machine (`huggingface-cli login`, or
+`hf auth login` on newer versions of `huggingface_hub`).
+
 ## Running the full app
 Make sure Ollama is running (`ollama serve`, or the desktop app) before
 starting the dashboard — the Thesis and Market Intelligence sections
