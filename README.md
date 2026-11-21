@@ -116,6 +116,15 @@ not treated as resolved.
 - Contrastive relevance model trained on a small dataset (8 investment
   theses) - strong held-out evaluation results, but not yet validated at scale
 - Not intended as investment advice; outputs are informational only
+- `LLM_PROVIDER=api` is not implemented yet (raises `NotImplementedError`);
+  only the local Ollama provider works
+- The full pipeline has been run end to end only with Ollama and
+  `llama3.2`; other models and providers are untested
+- The small local model sometimes returns malformed JSON; the parsers fall
+  back to regex recovery or raw text (observed in a full run)
+- News coverage from NewsAPI is sparse for some tickers, and the thesis and
+  market-intelligence agents query separately, so they can return different
+  articles for the same stock (observed in a full run)
 
 ## Decision log
 Every meaningful design decision is recorded in `docs/decisions/` as an
@@ -138,10 +147,33 @@ requirements.txt
 ```
 
 ## Setup
-```
+
+1. Install the Python dependencies:
 pip install -r requirements.txt
-cp .env.example .env # then fill in your keys
-```
+
+2. Install Ollama and pull the model:
+ollama pull llama3.2
+ollama list
+The model name in your `.env` (`OLLAMA_MODEL`) must match exactly what
+`ollama list` shows (e.g. `llama3.2:latest`). If it doesn't match, Ollama
+returns a 404.
+
+3. Create your `.env` from the template and fill in your keys:
+cp .env.example .env # macOS / Linux
+copy .env.example .env # Windows
+- `NEWSAPI_KEY`: your NewsAPI key
+- `OLLAMA_MODEL`: set to `llama3.2` (the model this project was run with)
+- `LLM_PROVIDER`: optional, defaults to `ollama`. `LLM_PROVIDER=api` is
+  not implemented yet and raises `NotImplementedError`.
+
+Never commit `.env`.
+
+4. Hugging Face access: the relevance model
+(`navneet11/contrastive-relevance-v1`) is hosted in a private repo. You
+need a Hugging Face account that has been granted access to it, and you
+must be logged in on your machine (`huggingface-cli login`, or
+`hf auth login` on newer versions of `huggingface_hub`).
+
 ## Running the full app
 Make sure Ollama is running (`ollama serve`, or the desktop app) before
 starting the dashboard — the Thesis and Market Intelligence sections
